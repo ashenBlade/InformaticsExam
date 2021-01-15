@@ -6,7 +6,7 @@ namespace Tests
     public class Tests
     {
         private Tasks88_104 _tasks88104;
-        private const double Eps = 0.0001;
+        private const double Delta = 0.0001;
         [SetUp]
         public void Setup()
         {
@@ -25,7 +25,7 @@ namespace Tests
         public void Task96(int n, double expected)
         {
             var actual = _tasks88104.Task96(n);
-            Assert.AreEqual(expected, actual, Eps);
+            Assert.AreEqual(expected, actual, Delta);
         }
 
         [TestCase(1, 0.5)]
@@ -35,7 +35,7 @@ namespace Tests
         public void Task97(int n, double expected)
         {
             var actual = _tasks88104.Task97(n);
-            Assert.AreEqual(expected, actual, Eps);
+            Assert.AreEqual(expected, actual, Delta);
         }
 
         [TestCase(1, 0.66666666)]
@@ -44,7 +44,16 @@ namespace Tests
         public void Task98(int n, double expected)
         {
             var actual = _tasks88104.Task98(n);
-            Assert.AreEqual(expected, actual, Eps);
+            Assert.AreEqual(expected, actual, Delta);
+        }
+
+        [TestCase(1, 1, 1, 0.5)]
+        [TestCase(2, 1, 1, 2)]
+        [TestCase(3, 1, 1, 9.875)]
+        public void Task99(int n, int u, int v, double expected)
+        {
+            var actual = _tasks88104.Task99(n, u, v);
+            Assert.AreEqual(expected, actual, Delta);
         }
     }
 }

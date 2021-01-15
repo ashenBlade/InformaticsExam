@@ -265,5 +265,25 @@ namespace Tasks
 
             return sum;
         }
+
+
+        public double Task99(int n, int u, int v)
+        {
+            double ai = u, bi = v;
+            double fact = 2;
+            double ai1, bi1; // a(i - 1), b(i - 1)
+            double sum = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                sum += ai * bi / fact;
+                fact *= (i + 2);
+                ai1 = ai;
+                bi1 = bi;
+                ai = 2 * bi1 + ai1;
+                bi = 2 * ai1 * ai1 + bi1;
+            }
+
+            return sum;
+        }
     }
 }
