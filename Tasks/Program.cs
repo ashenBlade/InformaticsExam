@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml;
 
-namespace InformaticsExam
+namespace Tasks
 {
     class Program
     {

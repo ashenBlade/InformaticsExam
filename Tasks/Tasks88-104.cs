@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualBasic;
 
-namespace InformaticsExam
+namespace Tasks
 {
     public class Tasks88_104
     {
@@ -204,5 +204,24 @@ namespace InformaticsExam
             return product;
         }
 
+        public double Task96(int n)
+        {
+            if (n == 1)
+            {
+                return 1;
+            }
+
+            double ai1 = 1, bi1 = 1; // a(i - 1), b(i - 1)
+            double ai = 0, bi = 0; // ai, bi
+            double sum = 1;
+            for (int i = 1; i < n; i++)
+            {
+                ai = 0.5 * (Math.Sqrt(bi1) + 0.5 * Math.Sqrt(ai1));
+                bi = 2 * ai1 * ai1 + bi1;
+                sum += ai * bi;
+            }
+
+            return sum;
+        }
     }
 }
