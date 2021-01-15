@@ -6,7 +6,8 @@ namespace Tests
     class TestTasks110_119
     {
         private Task110_119 _tasks110119;
-        private const double delta = 0.0001;
+        private const double Delta = 0.0001;
+
         [SetUp]
         public void SetUp()
         {
@@ -19,7 +20,7 @@ namespace Tests
         public void Test110(int n, double expectedResult)
         {
             double actual = _tasks110119.Task110(n);
-            Assert.AreEqual(expectedResult, actual, delta);
+            Assert.AreEqual(expectedResult, actual, Delta);
         }
 
         [TestCase(3, 8, 0.3256386979639476)]
@@ -28,7 +29,7 @@ namespace Tests
         public void Test111(double x, int n, double expectedResult)
         {
             double actual = _tasks110119.Task111(x, n);
-            Assert.AreEqual(expectedResult, actual, delta);
+            Assert.AreEqual(expectedResult, actual, Delta);
         }
 
         [TestCase(5, 3, 10)]
@@ -39,7 +40,7 @@ namespace Tests
         public void Test112(int n, int k, double expectedResult)
         {
             double actual = _tasks110119.Task112(n, k);
-            Assert.AreEqual(expectedResult, actual, delta);
+            Assert.AreEqual(expectedResult, actual, Delta);
         }
 
         [TestCase(5, 15)]
@@ -58,7 +59,7 @@ namespace Tests
         public void Test114A(int n, double expectedResult)
         {
             double actual = _tasks110119.Task114A(n);
-            Assert.AreEqual(expectedResult, actual, delta);
+            Assert.AreEqual(expectedResult, actual, Delta);
         }
 
         [TestCase(5, 1.7166666666666668)]
@@ -67,7 +68,7 @@ namespace Tests
         public void Test114C(int n, double expectedResult)
         {
             double actual = _tasks110119.Task114C(n);
-            Assert.AreEqual(expectedResult, actual, delta);
+            Assert.AreEqual(expectedResult, actual, Delta);
         }
 
         [TestCase(1, 2)]
@@ -76,7 +77,7 @@ namespace Tests
         public void Test115G(int n, double expectedResult)
         {
             double actual = _tasks110119.Task115G(n);
-            Assert.AreEqual(expectedResult, actual, delta);
+            Assert.AreEqual(expectedResult, actual, Delta);
         }
     }
 }
