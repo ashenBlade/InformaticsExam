@@ -219,6 +219,26 @@ namespace Tasks
                 ai = 0.5 * (Math.Sqrt(bi1) + 0.5 * Math.Sqrt(ai1));
                 bi = 2 * ai1 * ai1 + bi1;
                 sum += ai * bi;
+                ai1 = ai;
+                bi1 = bi;
+            }
+
+            return sum;
+        }
+
+        public double Task97(int n)
+        {
+            double xi1 = 1, yi1 = 1; // x(i - 1), y(i - 1)
+            double xi = 0, yi = 0;
+            double sum = 0.5;
+            for (int i = 1; i < n; i++)
+            {
+                xi = 0.3 * xi1;
+                yi = xi1 + yi1;
+                // Reduced excess abs from yi (yi can't be negative)
+                sum += xi / (1 + yi);
+                xi1 = xi;
+                yi1 = yi;
             }
 
             return sum;
