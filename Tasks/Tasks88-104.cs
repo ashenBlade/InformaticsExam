@@ -243,5 +243,27 @@ namespace Tasks
 
             return sum;
         }
+
+        public double Task98(int n)
+        {
+            double ai1, bi1; // a(i - 1), b(i - 1)
+            double ai = 1, bi = 1;
+            double sum = 0;
+            int fact = 1; // Factorial
+            int power = 2; // Power of 2
+
+            for (int i = 1; i <= n; i++)
+            {
+                sum += power / ((1 + ai * ai + bi * bi) * fact);
+                ai1 = ai;
+                bi1 = bi;
+                ai = 3 * bi1 + 2 * ai1;
+                bi = 2 * ai1 + bi1;
+                fact *= i+1;
+                power *= 2;
+            }
+
+            return sum;
+        }
     }
 }

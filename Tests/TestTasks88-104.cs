@@ -37,5 +37,14 @@ namespace Tests
             var actual = _tasks88104.Task97(n);
             Assert.AreEqual(expected, actual, Eps);
         }
+
+        [TestCase(1, 0.66666666)]
+        [TestCase(2, 0.723809)]
+        [TestCase(3, 0.72631998)]
+        public void Task98(int n, double expected)
+        {
+            var actual = _tasks88104.Task98(n);
+            Assert.AreEqual(expected, actual, Eps);
+        }
     }
 }
