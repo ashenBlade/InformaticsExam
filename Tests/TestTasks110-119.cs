@@ -7,7 +7,8 @@ namespace Tests
     class TestTasks110_119
     {
         private Task110_119 _tasks110119;
-        private const double delta = 0.0001;
+        private const double Delta = 0.0001;
+
         [SetUp]
         public void SetUp()
         {
@@ -20,7 +21,7 @@ namespace Tests
         public void Test110(int n, double expectedResult)
         {
             double actual = _tasks110119.Task110(n);
-            Assert.AreEqual(expectedResult, actual, delta);
+            Assert.AreEqual(expectedResult, actual, Delta);
         }
     }
 }
