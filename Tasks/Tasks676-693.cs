@@ -80,7 +80,7 @@
         public double[,] Task679A(double[,] matrixA, double[,] matrixB)
         {
             int n = matrixA.GetLength(0);
-            double[] maxValuesByLines = new double[n];
+            double[] maxValuesByLinesB = new double[n];
             for (int i = 0; i < n; i++)
             {
                 double max = double.MinValue;
@@ -89,7 +89,7 @@
                     if (matrixB[i, j] > max)
                         max = matrixB[i, j];
                 }
-                maxValuesByLines[i] = max;
+                maxValuesByLinesB[i] = max;
             }
 
             double[,] result = new double[n, n];
@@ -98,7 +98,7 @@
             {
                 for (int j = 0; j < n; j++)
                 {
-                    result[i, j] = matrixA[i, j] * maxValuesByLines[i];
+                    result[i, j] = matrixA[i, j] * maxValuesByLinesB[i];
                 }
             }
 
@@ -108,7 +108,7 @@
         public double[,] Task679B(double[,] matrixA, double[,] matrixB)
         {
             int n = matrixA.GetLength(0);
-            double[] productByLines = new double[n];
+            double[] productByLinesB = new double[n];
             for (int i = 0; i < n; i++)
             {
                 double product = 1;
@@ -116,7 +116,7 @@
                 {
                     product *= matrixB[i, j];
                 }
-                productByLines[i] = product;
+                productByLinesB[i] = product;
             }
 
             double[,] result = new double[n, n];
@@ -125,7 +125,7 @@
             {
                 for (int i = 0; i < n; i++)
                 {
-                    result[j, i] = matrixA[j, i] + productByLines[i];
+                    result[j, i] = matrixA[j, i] + productByLinesB[i];
                 }
             }
 
