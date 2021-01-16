@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using Tasks;
 
@@ -80,6 +82,80 @@ namespace Tests
         public void Task806b(string text, bool expected)
         {
             var actual = _tasks.Task806b(text);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Task808a()
+        {
+            var texts = new []{"hello hello hello", "1 1 2", "a b c d"};
+            var expected = new Dictionary<string, int>[]
+                           {
+                               new Dictionary<string, int>() {{"hello", 3}},
+                               new Dictionary<string, int>(){{"1", 2}, {"2", 1}},
+                               new Dictionary<string, int>(){{"a", 1}, {"b", 1}, {"c", 1}, {"d", 1}}
+                           };
+            for (int i = 0; i < 3; i++)
+            {
+                Assert.AreEqual(expected[i], _tasks.Task808a(texts[i]));
+            }
+        }
+
+        [Test]
+        public void Task808b()
+        {
+            var texts = new []{"hello my name", "yes no abracadabra", "a b c d"};
+            var expected = new[]
+                           {
+                               new List<string>() {"hello", "name"}, new List<string>() {"abracadabra"},
+                               new List<string>() {"a"}
+                           };
+            for (int i = 0; i < 3; i++)
+            {
+                var actual = _tasks.Task808b(texts[i]);
+                Assert.AreEqual(expected[i], actual);
+            }
+        }
+
+        [Test]
+        public void Task808c()
+        {
+            var texts = new []{"hello my name", "yes no abracadabra", "a b c d", "ab abbb"};
+            var expected = new[]
+                           {
+                               new List<string>() {"name"}, new List<string>() {"abracadabra"},
+                               new List<string>() {"a", "b"}, new List<string>() {"ab", "abbb"}
+                           };
+            for (int i = 0; i < 4; i++)
+            {
+                Assert.AreEqual(expected[i], _tasks.Task808c(texts[i]));
+            }
+        }
+
+        [Test]
+        public void Task808d()
+        {
+            var texts = new []{"turning my name", "yes no abracadabra", "a walking swimming d", "ab 123"};
+            var expected = new[]
+                           {
+                               new List<string>(){"turned", "my", "name"},
+                               new List<string>(){"yes", "no", "abracadabra"},
+                               new List<string>(){"a", "walked", "swimmed", "d"},
+                               new List<string>(){"ab", "123"},
+                           };
+            for (int i = 0; i < 4; i++)
+            {
+                Assert.AreEqual(expected[i], _tasks.Task808d(texts[i]));
+            }
+        }
+
+        [TestCase(123, "123")]
+        [TestCase(12345, "12 345")]
+        [TestCase(12, "12")]
+        [TestCase(1234567, "1 234 567")]
+        public void Task809(int number, string expected)
+        {
+            var actual = _tasks.Task809(number);
             Assert.AreEqual(expected, actual);
         }
     }

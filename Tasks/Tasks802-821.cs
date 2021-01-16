@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Mime;
 using System.Text;
@@ -138,6 +140,250 @@ namespace Tasks
             }
 
             return true;
+        }
+
+        // I don't know(
+        public string[] Task807(char[,] matrix)
+        {
+            return null;
+        }
+
+        public Dictionary<string, int> Task808a(string text)
+        {
+            var builder = new StringBuilder();
+            var dict = new Dictionary<string, int>();
+            foreach (var letter in text)
+            {
+                if (letter == ' ')
+                {
+                    if (0 < builder.Length)
+                    {
+                        var str = builder.ToString();
+                        if (!dict.ContainsKey(str))
+                            dict[str] = 0;
+                        dict[str]++;
+                        builder.Clear();
+                    }
+                }
+                else
+                    builder.Append(letter);
+            }
+
+            // Crutch
+            if (0 < builder.Length)
+            {
+                var str = builder.ToString();
+                if (!dict.ContainsKey(str))
+                    dict[str] = 0;
+                dict[str]++;
+                builder.Clear();
+
+            }
+
+            return dict;
+        }
+
+        public List<string> Task808b(string text)
+        {
+            var builder = new StringBuilder();
+            var vowels = new char[] {'a', 'e', 'i', 'o', 'u'};
+            var words = new List<string>();
+            int maxVowelCount = 0;
+            int currentVowelCount = 0;
+            foreach (var letter in text)
+            {
+                if (letter == ' ')
+                {
+                    if (0 < builder.Length)
+                    {
+                        if (maxVowelCount < currentVowelCount)
+                        {
+                            maxVowelCount = currentVowelCount;
+                            words.Clear();
+                            words.Add(builder.ToString());
+                        }
+
+                        if (maxVowelCount == currentVowelCount)
+                        {
+                            var str = builder.ToString();
+                            bool contains = false;
+                            foreach (var word in words)
+                                if (word == str)
+                                {
+                                    contains = true;
+                                    break;
+                                }
+                            if (!contains)
+                                words.Add(str);
+
+                        }
+                    }
+
+                    builder.Clear();
+                    currentVowelCount = 0;
+                }
+                else
+                {
+                    builder.Append(letter);
+                    foreach (var vowel in vowels)
+                    {
+                        if (letter == vowel)
+                        {
+                            currentVowelCount++;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (0 < builder.Length)
+            {
+                if (maxVowelCount < currentVowelCount)
+                {
+                    maxVowelCount = currentVowelCount;
+                    words.Clear();
+                    words.Add(builder.ToString());
+                }
+
+                if (maxVowelCount == currentVowelCount)
+                {
+                    var str = builder.ToString();
+                    bool contains = false;
+                    foreach (var word in words)
+                        if (word == str)
+                        {
+                            contains = true;
+                            break;
+                        }
+                    if (!contains)
+                        words.Add(str);
+
+                }
+            }
+            return words;
+        }
+
+        private List<string> SplitText(string text)
+        {
+            var builder = new StringBuilder();
+            var words = new List<string>();
+            foreach (var letter in text)
+            {
+                if (letter == ' ')
+                {
+                    if (0 < builder.Length)
+                    {
+                        var str = builder.ToString();
+                        words.Add(str);
+                        builder.Clear();
+                    }
+                }
+                else
+                {
+                    builder.Append(letter);
+                }
+            }
+
+            if (0 < builder.Length)
+            {
+                words.Add(builder.ToString());
+            }
+
+            return words;
+        }
+        public List<string> Task808c(string text)
+        {
+            var maxProportion = 0.0;
+            var words = SplitText(text);
+            var total = new List<string>();
+            foreach (var word in words)
+            {
+                // Count proportion
+                var currentProportion = 0.0;
+                foreach (var letter in word)
+                {
+                    if (letter == 'a' || letter == 'b')
+                        currentProportion++;
+                }
+                currentProportion /= word.Length;
+
+                // Differ current with maximum
+                if (maxProportion < currentProportion)
+                {
+                    maxProportion = currentProportion;
+                    total.Clear();
+                    total.Add(word);
+                }
+                else if (Math.Abs(maxProportion - currentProportion) < 0.01)
+                {
+                    total.Add(word);
+                }
+            }
+
+            return total;
+        }
+
+        public List<string> Task808d(string text)
+        {
+            var words = SplitText(text);
+            var total = new List<string>();
+            var builder = new StringBuilder();
+            foreach (var word in words)
+            {
+                builder.Append(word);
+                if (3 <= word.Length)
+                {
+                    var length = word.Length;
+                    if (word[length - 3] == 'i' && word[length - 2] == 'n' && word[length - 1] == 'g')
+                    {
+                        builder.Remove(length - 3, 3);
+                        builder.Append("ed");
+                    }
+                }
+                total.Add(builder.ToString());
+                builder.Clear();
+            }
+
+            return total;
+        }
+
+        public string Task809(int number)
+        {
+            var builder = new StringBuilder();
+            var length = 1;
+            var size = 1;
+            while (number / (length *= 10) != 0)
+            {
+                size++;
+            }
+
+            int remainder = 1;
+            for (int i = 0; i < size % 3; i++)
+            {
+                remainder *= 10;
+            }
+
+            if (remainder != 1)
+            {
+                // Add first digits
+                builder.Append(number / (length / remainder));
+                number %= (length /= remainder);
+                if (length >= 1000)
+                {
+                    builder.Append(' ');
+                }
+            }
+
+            while (0 < number && 1 < length)
+            {
+                builder.Append(number / (length / 1000));
+                number %= length / 1000;
+                length /= 1000;
+                if (number != 0)
+                    builder.Append(' ');
+            }
+
+            return builder.ToString();
         }
     }
 }
