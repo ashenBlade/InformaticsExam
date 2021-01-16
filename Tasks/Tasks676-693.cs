@@ -1,4 +1,6 @@
-﻿namespace Tasks
+﻿using System;
+
+namespace Tasks
 {
     public class Tasks676_693
     {
@@ -129,6 +131,110 @@
                 }
             }
 
+            return result;
+        }
+
+        public int[,] Task682(int[,] matrix, int k, int l)
+        {
+            k -= 1;
+            l -= 1;
+            int s = Math.Max(k, l);
+            int p = k + l - s;
+
+            for (int i = p; i < s - 1; i++)
+            {
+                SwapLines(matrix, i, i + 1);
+            }
+
+            if (k < l)
+                SwapLines(matrix, l - 1, l);
+
+            return matrix;
+        }
+
+        public double Task692A(double[,] matrix)
+        {
+            double max = double.MinValue;
+            int n = matrix.GetLength(0);
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i; j < n; j++)
+                {
+                    if (matrix[i, j] > max)
+                        max = matrix[i, j];
+                }
+            }
+            return max;
+        }
+
+        public double Task692C(double[,] matrix)
+        {
+            double max = double.MinValue;
+            int n = matrix.GetLength(0);
+            int middle = (int)Math.Round(n / 2d);
+
+            for (int i = 0; i < middle; i++)
+            {
+                for (int j = i; j < n - i; j++)
+                {
+                    if (matrix[i, j] > max)
+                        max = matrix[i, j];
+                }
+            }
+            return max;
+        }
+
+        public double Task692E(double[,] matrix)
+        {
+            double max = double.MinValue;
+            int n = matrix.GetLength(0);
+            int middle = (int)Math.Round(n / 2d);
+
+            for (int i = 0; i < middle; i++)
+            {
+                for (int j = i; j < n - i; j++)
+                {
+                    if (matrix[i, j] > max)
+                        max = matrix[i, j];
+                    if (matrix[n - i - 1, j] > max)
+                        max = matrix[n - i - 1, j];
+                }
+            }
+            return max;
+        }
+
+        public double[,] Task693A(double[,] matrix)
+        {
+            int n = matrix.GetLength(0) / 2;
+            double[,] result = new double[2*n, 2*n];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    result[i, j] = matrix[i + n, j + n];
+                    result[i + n, j + n] = matrix[i, j];
+                    result[i, j + n] = matrix[i + n, j];
+                    result[i + n, j] = matrix[i, j + n];
+                }
+            }
+            return result;
+        }
+
+        public double[,] Task693B(double[,] matrix)
+        {
+            int n = matrix.GetLength(0) / 2;
+            double[,] result = new double[2 * n, 2 * n];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    result[i, j] = matrix[i + n, j];
+                    result[i, j + n] = matrix[i, j];
+                    result[i + n, j + n] = matrix[i, j + n];
+                    result[i + n, j] = matrix[i + n, j + n];
+                }
+            }
             return result;
         }
     }
