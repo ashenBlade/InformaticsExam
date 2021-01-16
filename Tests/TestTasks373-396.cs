@@ -99,5 +99,24 @@ namespace Tests
             var actual = _tasks373.Task394e(matrix);
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Task395()
+        {
+            double x = 3;
+            var matrix = new double[,] {{1, 1, 2, 2, 0, 1}, {4, 2, 4, -1, 2, 4}, {0, 1, -4, 2, -10, 2}};
+            var expected = new double[] {1, 0, 1};
+            var actual = _tasks373.Task395(matrix, x);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Task396()
+        {
+            var matrix = new double[,] {{-1, 6, 2, 7}, {2, -1, 0, 0}, {-2, 3, 1, 4}, {6, 4, 8, 5}};
+            var expected = new double[] {0, 2, 8, 23};
+            var actual = _tasks373.Task396(matrix);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

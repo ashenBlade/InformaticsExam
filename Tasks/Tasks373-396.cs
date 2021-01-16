@@ -344,5 +344,62 @@ namespace Tasks
 
             return sequence;
         }
+
+        public int[] Task395(double[,] matrix, double x)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                int coef = 1;
+                for (int j = 0; j < 2 * n; j++)
+                {
+                    if (x <= matrix[i, j])
+                    {
+                        coef = 0;
+                        break;
+                    }
+                }
+
+                sequence[i] = coef;
+            }
+
+            return sequence;
+        }
+
+        public double[] Task396(double[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                double sum = 0;
+                int j = 0;
+                if (matrix[i, i] < 0)
+                {
+                    while (j < n && matrix[i, j] >= 0)
+                    {
+                        sum += matrix[i, j];
+                        j++;
+                    }
+                }
+                else
+                {
+                    while (j < n && matrix[i, j] < 0)
+                    {
+                        j++;
+                    }
+
+                    for (int k = j; k < n; k++)
+                    {
+                        sum += matrix[i, k];
+                    }
+                }
+
+                sequence[i] = sum;
+            }
+
+            return sequence;
+        }
     }
 }
