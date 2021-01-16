@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Net.Mime;
 using System.Text;
@@ -384,6 +385,46 @@ namespace Tasks
             }
 
             return builder.ToString();
+        }
+
+        // Nope
+        public string Task810(int n)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Task811(int n)
+        {
+            var builder = new StringBuilder();
+            var penny = n % 100;
+            var rubles = n / 100;
+            builder.Append(rubles)
+                   .Append(" руб. ")
+                   .Append(penny > 9
+                               ? penny
+                               : penny > 0
+                                   ? "0" + penny
+                                   : "00")
+                   .Append(" коп.");
+
+            return builder.ToString();
+        }
+
+        public bool Task812a(string text)
+        {
+            const string pattern = "one";
+            for (int i = 0; i < text.Length - 2; i++)
+            {
+                if (text[i] == pattern[0] && text[i + 1] == pattern[1] && text[i + 2] == pattern[2])
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool Task812b(string text)
+        {
+            throw new NotImplementedException();
         }
     }
 }

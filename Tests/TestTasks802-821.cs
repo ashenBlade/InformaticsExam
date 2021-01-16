@@ -158,5 +158,27 @@ namespace Tests
             var actual = _tasks.Task809(number);
             Assert.AreEqual(expected, actual);
         }
+
+        [TestCase(100, "1 руб. 00 коп.")]
+        [TestCase(1123, "11 руб. 23 коп.")]
+        [TestCase(1103, "11 руб. 03 коп.")]
+        public void Task811(int price, string expected)
+        {
+            var actual = _tasks.Task811(price);
+            Assert.AreEqual(expected, actual);
+        }
+
+
+
+        [TestCase("one", true)]
+        [TestCase("two", false)]
+        [TestCase("hhhonehhh", true)]
+        [TestCase("neoone", true)]
+        [TestCase("ne+oo*ne", false)]
+        public void Task812(string text, bool expected)
+        {
+            var actual = _tasks.Task812a(text);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
