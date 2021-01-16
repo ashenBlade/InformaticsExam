@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using Microsoft.VisualBasic;
 
 namespace Tasks
@@ -212,7 +213,7 @@ namespace Tasks
             }
 
             double ai1 = 1, bi1 = 1; // a(i - 1), b(i - 1)
-            double ai = 0, bi = 0; // ai, bi
+            double ai = 0, bi = 0;   // ai, bi
             double sum = 1;
             for (int i = 1; i < n; i++)
             {
@@ -249,7 +250,7 @@ namespace Tasks
             double ai1, bi1; // a(i - 1), b(i - 1)
             double ai = 1, bi = 1;
             double sum = 0;
-            int fact = 1; // Factorial
+            int fact = 1;  // Factorial
             int power = 2; // Power of 2
 
             for (int i = 1; i <= n; i++)
@@ -284,6 +285,85 @@ namespace Tasks
             }
 
             return sum;
+        }
+
+        // Can't check correctness
+        public double Task100()
+        {
+            double xi1 = 1, xi2 = 1, xi3 = 1;
+            int power = 2;
+            double sum = 0;
+            sum += xi3 / power;
+            sum += xi2 / (power *= 2);
+            sum += xi1 / (power *= 2);
+            for (int i = 4; i <= 100; i++)
+            {
+                double xi = xi1 + xi3;
+                sum += xi / (power *= 2);
+                xi3 = xi2;
+                xi2 = xi1;
+                xi1 = xi;
+            }
+
+            return sum;
+        }
+
+        public double Task101(double a, double x, double eps)
+        {
+            double yi1 = a;
+            double yi = 0.5 * (yi1 + x / yi1);
+            while (Math.Abs(yi * yi - yi1 * yi1) >= eps)
+            {
+                yi1 = yi;
+                yi = 0.5 * (yi1 + x / yi1);
+            }
+            return yi;
+        }
+
+        public double Task102()
+        {
+            double xi1 = 1;
+            double xi = (2 - xi1 * xi1 * xi1) / 5;
+            const double eps = 1e-5;
+            while (Math.Abs(xi - xi1) > eps)
+            {
+                xi1 = xi;
+                xi = (2 - xi1 * xi1 * xi1) / 5;
+            }
+
+            return xi;
+        }
+        public double Task103(double eps)
+        {
+            double yi1 = 0;
+            double yi = (yi1 + 1) / (yi1 + 2);
+            while (Math.Abs(yi1 - yi) > eps)
+            {
+                yi1 = yi;
+                yi = (yi1 + 1) / (yi1 + 2);
+            }
+
+            return yi;
+        }
+
+        public (double, double) Task104(double a)
+        {
+            var xi1 = a <= 1
+                          ? Math.Min(2 * a, 0.95)
+                          : a < 25
+                              ? a / 5.0
+                              : a / 25.0;
+            var eps = 0.8 * 1e-6 / a;
+            var diff = (a - xi1 * xi1 * xi1 * xi1 * xi1);
+            var product = 5 * xi1 * xi1 * xi1 * xi1;
+            while (Math.Abs( diff / product) >= eps)
+            {
+                xi1 = (4 * xi1 * xi1 * xi1 * xi1 * xi1 + a) / product;
+                diff = (a - xi1 * xi1 * xi1 * xi1 * xi1);
+                product = (5 * xi1 * xi1 * xi1 * xi1);
+            }
+
+            return (xi1, diff);
         }
     }
 }
