@@ -37,25 +37,18 @@ namespace Tasks
             return inverted;
         }
 
-        public int Task88c(int number)
+        private int Task88c(int n)
         {
-            int length = 10;
-
-            // Find number length
-            while (number / length > 9)
+            var lastNum = n % 10;
+            var rank = 1;
+            var tmp = n;
+            while (n > 9)
             {
-                length *= 10;
+                rank *= 10;
+                n /= 10;
             }
 
-            int lastDigit = number % 10;
-
-            // Replace last digit with first
-            number += (number / length - number % 10);
-
-            // Replace first digit with last
-            number += (lastDigit * length - length);
-
-            return number;
+            return tmp - n * rank + lastNum * rank - lastNum + n;
         }
 
         public int Task88d(int number)
