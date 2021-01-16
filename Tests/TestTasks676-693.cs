@@ -147,6 +147,162 @@ namespace Tests
             Assert.IsTrue(IsEqualMatrixs(_tasks676693.Task679B(matrixA, matrixB), expectedResult));
         }
 
+        [Test]
+        public void Test682_1()
+        {
+            int[,] matrix =
+            {
+                {1, 2, 3 },
+                {4, 5, 6 },
+                {7, 8, 9 },
+                {10, 11, 12 },
+                {13, 14, 15 }
+            };
+            int k = 2;
+            int l = 5;
+            int[,] expectedResult =
+            {
+                {1, 2, 3 },
+                {7, 8, 9 },
+                {10, 11, 12 },
+                {13, 14, 15 },
+                {4, 5, 6 }
+            };
+            Assert.IsTrue(IsEqualMatrixs(_tasks676693.Task682(matrix, k, l), expectedResult));
+        }
+
+        [Test]
+        public void Test682_2()
+        {
+            int[,] matrix =
+            {
+                {1, 2, 3 },
+                {4, 5, 6 },
+                {7, 8, 9 },
+                {10, 11, 12 },
+                {13, 14, 15 }
+            };
+            int k = 5;
+            int l = 2;
+            int[,] expectedResult =
+            {
+                {1, 2, 3 },
+                {7, 8, 9 },
+                {10, 11, 12 },
+                {4, 5, 6 },
+                {13, 14, 15 }
+            };
+            Assert.IsTrue(IsEqualMatrixs(_tasks676693.Task682(matrix, k, l), expectedResult));
+        }
+
+        [Test]
+        public void Test692A()
+        {
+            double[,] matrix =
+            {
+                {1, 2, 3 },
+                {4, 5, 6 },
+                {7, 8, 9 }
+            };
+            double expectedResult = 9;
+            Assert.AreEqual(expectedResult, _tasks676693.Task692A(matrix));
+        }
+
+        [Test]
+        public void Test692C_1()
+        {
+            double[,] matrix =
+            {
+                {1, 2, 3, 4 },
+                {5, 6, 7, 8 },
+                {9, 10, 11, 12 },
+                {13, 14, 15, 16 }
+            };
+            double expectedResult = 7;
+            Assert.AreEqual(expectedResult, _tasks676693.Task692C(matrix));
+        }
+
+        [Test]
+        public void Test692C_2()
+        {
+            double[,] matrix =
+            {
+                {1, 2, 3 },
+                {4, 5, 6 },
+                {7, 8, 9 }
+            };
+            double expectedResult = 5;
+            Assert.AreEqual(expectedResult, _tasks676693.Task692C(matrix));
+        }
+
+        [Test]
+        public void Test692E_1()
+        {
+            double[,] matrix =
+            {
+                {1, 2, 3 },
+                {4, 10, 6 },
+                {7, 8, 9 }
+            };
+            double expectedResult = 10;
+            Assert.AreEqual(expectedResult, _tasks676693.Task692E(matrix));
+        }
+
+        [Test]
+        public void Test692E_2()
+        {
+            double[,] matrix =
+            {
+                {1, 2, 3, 4 },
+                {5, 6, 7, 8 },
+                {9, 10, 17, 12 },
+                {13, 14, 15, 16 }
+            };
+            double expectedResult = 17;
+            Assert.AreEqual(expectedResult, _tasks676693.Task692E(matrix));
+        }
+
+        [Test]
+        public void Test693A()
+        {
+            double[,] matrix =
+            {
+                {1, 2, 3, 4 },
+                {5, 6, 7, 8 },
+                {9, 10, 11, 12 },
+                {13, 14, 15, 16 }
+            };
+            double[,] expectedResult =
+            {
+                {11, 12, 9, 10 },
+                {15, 16, 13, 14 },
+                {3, 4, 1, 2 },
+                {7, 8, 5, 6 }
+            };
+            Assert.IsTrue(IsEqualMatrixs(_tasks676693.Task693A(matrix), expectedResult));
+        }
+
+        [Test]
+        public void Test693B()
+        {
+            double[,] matrix =
+{
+                {1, 2, 3, 4 },
+                {5, 6, 7, 8 },
+                {9, 10, 11, 12 },
+                {13, 14, 15, 16 }
+            };
+            double[,] expectedResult =
+            {
+                {9, 10, 1, 2 },
+                {13, 14, 5, 6 },
+                {11, 12, 3, 4 },
+                {15, 16, 7, 8 }
+            };
+            Assert.IsTrue(IsEqualMatrixs(_tasks676693.Task693B(matrix), expectedResult));
+
+        }
+
         public bool IsEqualMatrixs(Array firstMatrix, Array secondMatrix)
         {
             if (firstMatrix.GetLength(0) != secondMatrix.GetLength(0) ||
