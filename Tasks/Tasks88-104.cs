@@ -88,17 +88,16 @@ namespace Tasks
             return (n / gcd, m / gcd);
         }
 
-        public double Task91(int n)
+        public static double Task91(int n)
         {
-            var fact = 1;
-            var sum = 0.0;
+            var ak = 1.0;
             for (int i = 1; i <= n; i++)
             {
-                fact *= i;
-                sum += 1 / (float) i;
+                var ai = ak * i + 1.0 / i;
+                ak = ai;
             }
 
-            return sum + fact;
+            return ak;
         }
 
         public double Task92(int n)
