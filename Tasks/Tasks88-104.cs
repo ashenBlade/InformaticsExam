@@ -177,22 +177,20 @@ namespace Tasks
             return (ui1 - vi1) / (Math.Abs(ui2 + vi1) + 2);
         }
 
-        public double Task95(int n)
+        public double Task95()
         {
+            const double n = 14;
             int e = 2;
-            if (n < 2)
-                return 1;
             var ai2 = 1.0; // a(i - 2)
             var ai1 = 1.0; // a(i - 1)
-            var ai = ai2 + ai1 / e;
-            var product = ai;
-            for (int i = 2; i < n; i++)
+            var product = 1.0;
+            for (int i = 2; i <= n; i++)
             {
-                ai2 = ai1;
-                ai1 = ai;
-                ai = ai2 + ai1 / e;
+               var ai = ai2 + ai1 / e;
                 e *= 2;
                 product *= ai;
+                ai2 = ai1;
+                ai1 = ai;
             }
 
             return product;
