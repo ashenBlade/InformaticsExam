@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Reflection;
@@ -120,8 +121,8 @@ namespace Tasks
                     if (matrix[j, i] < currentMinNum)
                         currentMinNum = matrix[j, i];
                     currentSum += matrix[j, i] < 0
-                                  ? -matrix[j, i]
-                                  : matrix[j, i];
+                                      ? -matrix[j, i]
+                                      : matrix[j, i];
                 }
 
                 if (maxSum < currentSum)
@@ -134,5 +135,214 @@ namespace Tasks
             return minNum;
         }
 
+        public int[] Task393a(int[,] matrix)
+        {
+            int n = matrix.GetLength(0);
+            var sequence = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                int min = matrix[i, 0];
+                for (int j = 0; j <= i; j++)
+                {
+                    if (matrix[i, j] < min)
+                    {
+                        min = matrix[i, j];
+                    }
+                }
+
+                sequence[i] = min;
+            }
+
+            return sequence;
+        }
+
+        public int[] Task393b(int[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                int num = 1;
+                for (int j = 0; j < n; j++)
+                {
+                    if (0 < matrix[i, j])
+                    {
+                        num = matrix[i, j];
+                        break;
+                    }
+                }
+
+                sequence[i] = num;
+            }
+
+            return sequence;
+        }
+
+        public int[] Task393c(int[,] matrix)
+        {
+            int n = matrix.GetLength(0);
+            var sequence = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                bool wasNegative = false;
+                int sum = 100;
+                for (int j = 0; j < n; j++)
+                {
+                    sum += wasNegative
+                               ? matrix[i, j]
+                               : 0;
+                    if (!wasNegative && matrix[i, j] < 0)
+                    {
+                        sum = 0;
+                        wasNegative = true;
+                    }
+                }
+
+                sequence[i] = sum;
+            }
+
+            return sequence;
+        }
+
+        public int[] Task393d(int[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                int sum = -1;
+                int j = n - 1;
+                while (-1 < j && 0 <= matrix[i, j]) j--;
+                if (j != -1)
+                {
+                    sum = 0;
+                    for (int k = 0; k < j; k++)
+                    {
+                        sum += matrix[i, k];
+                    }
+                }
+
+                sequence[i] = sum;
+            }
+            return sequence;
+        }
+
+        public List<int> Task394a(int[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (matrix[i, j] != 0)
+                    {
+                        break;
+                    }
+
+                    if (j == n - 1)
+                    {
+                        sequence.Add(i);
+                    }
+                }
+            }
+
+            return sequence;
+        }
+
+        public List<int> Task394b(int[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                var number = matrix[i, 0];
+                for (int j = 0; j < n; j++)
+                {
+                    if (number != matrix[i, j])
+                        break;
+                    if (j == n - 1)
+                    {
+                        sequence.Add(i);
+                    }
+                }
+            }
+
+            return sequence;
+        }
+
+        public List<int> Task394c(int[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (matrix[i, j] % 2 != 0)
+                    {
+                        break;
+                    }
+
+                    if (j == n - 1)
+                    {
+                        sequence.Add(i);
+                    }
+                }
+            }
+
+            return sequence;
+        }
+
+        public List<int> Task394d(int[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                int delta = 0;
+                for (int j = 1; j < n; j++)
+                {
+                    if (delta == 0)
+                    {
+                        delta = matrix[i, j] - matrix[i, j - 1];
+                    }
+                    else if (Math.Sign(delta) != Math.Sign(matrix[i, j] - matrix[i, j - 1]))
+                    {
+                        break;
+                    }
+
+                    if (j == n - 1)
+                    {
+                        sequence.Add(i);
+                    }
+                }
+            }
+
+            return sequence;
+        }
+
+        public List<int> Task394e(int[,] matrix)
+        {
+            var n = matrix.GetLength(0);
+            var sequence = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n / 2; j++)
+                {
+                    if (matrix[i, j] != matrix[i, n - j - 1])
+                    {
+                        break;
+                    }
+
+                    if (j == n / 2 - 1)
+                    {
+                        sequence.Add(i);
+                    }
+                }
+            }
+
+            return sequence;
+        }
     }
 }
