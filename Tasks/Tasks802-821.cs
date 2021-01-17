@@ -629,5 +629,27 @@ namespace Tasks
 
             return result;
         }
+        
+        private static string Task813(string text)
+        {
+            if (!char.IsLetter(text[0]) || !char.IsLower(text[0]))
+                return text;
+            var index = 0;
+            while (index != text.Length && char.IsLetter(text[index]))
+            {
+                index++;
+            }
+
+            if (index == text.Length || !char.IsDigit(text[index]))
+                return text;
+            var builder = new StringBuilder(text);
+            while (index != text.Length && char.IsDigit(builder[index]))
+            {
+                builder[index] = '*';
+                index++;
+            }
+
+            return builder.ToString();
+        }
     }
 }
