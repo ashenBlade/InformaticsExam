@@ -387,11 +387,55 @@ namespace Tasks
             return builder.ToString();
         }
 
-        // Nope
-        public string Task810(int n)
+        private static string Task810(int n)
         {
-            throw new NotImplementedException();
+            if (n == 1000)
+                return "одна тысяча";
+            var result = new StringBuilder();
+            var numerals = new[] {"один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"};
+            var tens = new string[9];
+            var hundreads = new string[9];
+            tens[0] = "десять";
+            tens[3] = "сорок";
+            tens[8] = "девяносто";
+            for (int i = 1; i <= 2; i++)
+            {
+                tens[i] = numerals[i] + "дцать";
+            }
+
+            for (int i = 4; i <= 7; i++)
+            {
+                tens[i] = numerals[i] + "десять";
+            }
+
+            hundreads[0] = "сто";
+            hundreads[1] = "двести";
+            for (int i = 2; i <= 3; i++)
+            {
+                hundreads[i] = numerals[i] + "ста";
+            }
+
+            for (int i = 3; i <= 8; i++)
+            {
+                hundreads[i] = numerals[i] + "сот";
+            }
+
+            var number = new string[3][];
+            number[0] = numerals;
+            number[1] = tens;
+            number[2] = hundreads;
+            var startIndex = 0;
+            while (n > 0)
+            {
+                if (n % 10 != 0)
+                    result.Insert(0, number[startIndex][n % 10 - 1] + ' ');
+                startIndex++;
+                n /= 10;
+            }
+
+            return result.ToString();
         }
+
 
         public string Task811(int n)
         {
