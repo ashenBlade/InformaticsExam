@@ -426,5 +426,164 @@ namespace Tasks
         {
             throw new NotImplementedException();
         }
+        
+        
+        private static List<string> MakeList(string text, Func<char, bool> foo)
+        {
+            var list = new List<string>();
+            var index = 0;
+            var len = 0;
+            for (var i = 0; i < text.Length; i++)
+            {
+                if (foo(text[i]))
+                {
+                    len++;
+                    if (i == text.Length - 1)
+                    {
+                        list.Add(text.Substring(index, len));
+                    }
+                }
+                else
+                {
+                    if (len != 0)
+                        list.Add(text.Substring(index, len));
+                    len = 0;
+                    index = i + 1;
+                }
+            }
+
+            return list;
+        }
+        
+        private bool Task812A(string text)
+        {
+            var group = "one";
+            var wordsGroup = MakeList(text, char.IsLetter);
+            foreach (var word in wordsGroup)
+            {
+                if (word.Length != group.Length)
+                    continue;
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (word[i] != group[i])
+                        break;
+                    if (i == group.Length - 1)
+                        return true;
+                }
+            }
+
+            return false;
+        }
+        
+        private static bool Task812B(string text)
+        {
+            var wordsGroup = MakeList(text, char.IsLetter);
+            var signsGroup = MakeList(text, IsSign);
+            return wordsGroup.Count > signsGroup.Count;
+        }
+
+        private static bool IsSign(char e)
+        {
+            return e == '+' || e == '*' || e == '-';
+        }
+
+        private static string Task812C(string text)
+        {
+            var wordsGroup = MakeList(text, char.IsLetter);
+            var startIndex = 0;
+            while (!char.IsLetter(text[startIndex]))
+            {
+                startIndex++;
+            }
+
+            var lastIndex = startIndex + wordsGroup[0].Length;
+            while (!char.IsLetter(text[lastIndex]))
+            {
+                lastIndex++;
+            }
+
+            var builder = new StringBuilder(text);
+            for (int i = startIndex; i < lastIndex; i++)
+            {
+                if (builder[i] == '+')
+                    builder[i] = '1';
+                else if (builder[i] == '-')
+                    builder[i] = '2';
+                else if (builder[i] == '*')
+                    builder[i] = '3';
+            }
+
+            return builder.ToString();
+        }
+
+        private static int Task812D(string text)
+        {
+            var result = 0;
+            var wordsGroup = MakeList(text, char.IsLetter);
+            if (wordsGroup.Count >= 3)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < wordsGroup[i].Length; j++)
+                    {
+                        if (wordsGroup[i][j] == 'f')
+                            result++;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private static int Task812E(string text)
+        {
+            var wordsGroup = MakeList(text, char.IsLetter);
+            var result = 0;
+            foreach (var word in wordsGroup)
+            {
+                if (word[0] == word[word.Length - 1])
+                    result++;
+            }
+
+            return result;
+        }
+
+
+        private static List<string> Task812F(string text)
+        {
+            var result = new List<string>();
+            var wordsGroup = MakeList(text, char.IsLetter);
+            foreach (var word in wordsGroup)
+            {
+                var count = 0;
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (word[i] == 'a')
+                        count++;
+                }
+
+                if (count >= 2)
+                    result.Add(word);
+            }
+
+            return result;
+        }
+
+        private static string Task812G(string text)
+        {
+            string result = "";
+            var numbersGroup = MakeList(text, char.IsNumber);
+            var maxLen = 0;
+            foreach (var number in numbersGroup)
+            {
+                if (number.Length > maxLen)
+                {
+                    maxLen = number.Length;
+                    result = number;
+                }
+            }
+
+            return result;
+        }
     }
 }
