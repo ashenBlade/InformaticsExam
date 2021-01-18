@@ -393,6 +393,14 @@ namespace Tasks
                 return "одна тысяча";
             var result = new StringBuilder();
             var numerals = new[] {"один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"};
+            var firstTens = new string[9];
+            firstTens[0] = "одиннадцать";
+            firstTens[1] = "двенадцать";
+            firstTens[2] = "тринадцать";
+            for (int i = 3; i < firstTens.Length; i++)
+            {
+                firstTens[i] = numerals[i].Substring(0, numerals[i].Length - 1) + "надцать";
+            }
             var tens = new string[9];
             var hundreads = new string[9];
             tens[0] = "десять";
@@ -405,7 +413,7 @@ namespace Tasks
 
             for (int i = 4; i <= 7; i++)
             {
-                tens[i] = numerals[i] + "десять";
+                tens[i] = numerals[i] + "десят";
             }
 
             hundreads[0] = "сто";
@@ -425,10 +433,20 @@ namespace Tasks
             number[1] = tens;
             number[2] = hundreads;
             var startIndex = 0;
+            if (n % 100 > 10 && n % 100 < 20)
+            {
+                result.Insert(0, firstTens[n % 10 - 1]);
+                if (n > 99)
+                    result.Insert(0, number[2][n / 100 - 1] + ' ');
+                return result.ToString();
+            }
             while (n > 0)
             {
                 if (n % 10 != 0)
+                {
                     result.Insert(0, number[startIndex][n % 10 - 1] + ' ');
+                }
+
                 startIndex++;
                 n /= 10;
             }
