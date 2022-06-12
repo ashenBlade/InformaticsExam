@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.DataProtection;
+
 namespace AspNetCoreSampleApp;
 
 public class TimeMiddleware: IMiddleware

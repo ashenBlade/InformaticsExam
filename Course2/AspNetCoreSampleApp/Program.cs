@@ -1,4 +1,5 @@
 using AspNetCoreSampleApp;
+using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 
