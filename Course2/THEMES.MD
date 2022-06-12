@@ -381,59 +381,375 @@ model binding, массивы/объекты
 Работа с файлами - Безопасность
 Инъекции зависимостей
 
-6. ASP.NET Core Auth*
+## ASP.NET Core Auth*
 
-Фильтры MVC
-Виды фильтров
-Создание фильтров
-Добавление фильтров
-Identification / Authentication / Authorization
-Способы аутентификации
-По сертификатам
-По одноразовым паролям
-По ключам доступа
-Аутентификации по паролю
-HTTP authentication
-Forms authentication
-URL query
-Request body (POST, PUT, PATCH)
-HTTP header
-Аутентификация по паролю - Уязвимости
-Аутентификация по токенам
-Форматы токенов
-Аутентификация в ASP.NET Core
-HttpContext.User
-ClaimsPrincipal
-Claims vs Roles approach
-Процесс аутентификации
-Middleware
-Добавление в обработку
-Задачи аутентификации
-Схема аутентификация
-Создание аутентификационной куки
-Удадение и обновление куки
-ASP.Net Core Identity
-Возможности Identity
-Кастомизация Identity
-Сервисы Identity
-Настройка Cookie для Identity
-Identity’s database schema
-Сервисы
-Кастомизация пользователей
-Кастомные claims
-Simple Authorization
-Авторизация по ролям
-Authorization Policy
-Добавление политики авторизации
-Ограничения политик (методы)
-RequireAssertion(handler)
-Пример авторизации
-Пример своего ограничения
-Обработчик своего ограничения
-Регистрация своего ограничения
-Использование контекста MVC
-Resource-based authorization
-Включение в представления.
+### Фильтры MVC
+
+Фильтр - объект, позволяющий выполнять определенный код до и/или после выполнения основного метода.
+
+### Виды фильтров
+
+1. Авторизации
+2. Ресурсов
+3. Действий
+4. Исключений
+5. Результатов действий
+
+Образуют свой конвеер фильтров. На обратном пути работают только фильтр ресурсов и результатов.
+
+Также есть отдельный фильтр RazorPages
+
+### Создание фильтров
+
+Фильтр должен реализовать свой интерфейс:
+- Авторизации - IAuthorizationFilter
+- Ресурсов - IResourceFilter
+- Действий - IActionFilter
+- RazorPages - IPageFilter
+- Исключений - IExceptionFilter
+- Результатов - IResultFilter
+
+Это синхронные фильтры. Асинхронные имеют префикс Async после I (IAsyncActionFilter).
+
+### Добавление фильтров
+
+Фильтры могут быть добавлены:
+- Глобально, в опциях MVC
+```cs
+builder.Services.AddMvc(options =>
+        {
+            options.Filters.Add(new SomeFiler());
+        });
+```
+- Через атрибуты. Для этого нужно не только реализовать интерфейс, но и наследоваться от Attribute.
+Добавлять - как атрибуты методов
+
+### Identification / Authentication / Authorization
+
+Identification - кто ты: назвать имя, username (PK - в общем случае)
+
+Authentication - подтвердить что это ты: назвать пароль, passphrase, секретное слово
+
+Authorization - есть ли у тебя права для этого: в какой ты роли, сколько тебе лет, из какой страны
+
+Без вышележащего не может быть выполнено нижележащее: без аутентификации нельзя авторизовать (логично)
+
+### Способы аутентификации
+- По сертификатам: подписанный каким-нибудь авторитетом сертификат. 
+Применяется в сертификатах SSL.
+- По одноразовым паролям: SMS/EMAIL verification code (2FA)
+- По ключам доступа: API key, Access token
+- Аутентификации по паролю: username/password
+  - HTTP authentication: 
+Заголовок `Authorization: <type> <data>` 
+
+type: Basic, Bearer, HOBA, Mutual, OAuth, Digest
+data: данные закодированные base64.
+Например, Basic = base64encode({username}:{password})
+  - Forms authentication: в HTML форме логин, пароль.
+Они с запросом передаются на сервер.
+  - URL query: логин/пароль передаются в параметрах URL - небезопасно
+  - Request body (POST, PUT, PATCH) - передача данных в теле запроса, в специальном виде, например, json или xml. 
+
+### Аутентификация по паролю - Уязвимости
+
+1. Простые пароли
+2. Брут-форс атаки
+3. Передача в незашифрованном виде
+4. Нет возможности смены пароля
+5. Уязвимость восстановления/смены пароля
+6. При смене нет требований повторного ввода пароля
+7. Эксплуатация сохраненной сессии
+
+### Аутентификация по токенам
+
+Есть Identity Provider - владеет аккаунтами. 
+Другие - клиенты, ими пользуются, путем создания для себя токенов доступа описывающих пользователей (действующих от имени пользователя).
+SSO - один раз зарегистрировался, в остальных местах используешь аккаунт.
+
+Стандартов несколько:
+- OAuth
+- OpenID Connect
+- SAML
+- WS-Federation
+
+### Форматы токенов
+
+- SWT (Simple Web Token) - ключ-значение в формате HTTP формы
+- JWT (JavaScript Web Token) - 3 поля:
+  - header: метаданные
+  - payload: информация о токене (время действия, кому, от кого)
+  - sign: подпись
+- SAML (Security Assertion Markup Language) - токены в XML формате
+
+### Аутентификация в ASP.NET Core
+
+Встроена из коробки
+
+### HttpContext.User
+
+Свойство, представляющее данные о пользователе в формате ключ-значение (Claims).
+
+### ClaimsPrincipal
+
+Набор утверждений (claims) о пользователе: username, email, date... 
+в формате ключ-значение. 
+
+### Claims vs Roles approach
+
+Roles - устаревший, в HttpContext.User есть метод IsInRole только для совместимости.
+Claims дает больше информации о пользователе.
+
+### Процесс аутентификации
+
+1. Клиент вводит логин/пароль и отправляет запрос на сервер
+2. HttpContext.User выставляется в Anonymous
+3. При успешной аутентификации - пользователь аутентифицируется (HttpContext.SignInAsync, SignInManager.SignIn)
+4. Выставляются специальные зашифрованные куки представляющие пользователя
+5. При дальнейших входах, куки парсятся и выставляется HttpContext.User
+
+### Middleware. Добавление в обработку
+
+Для рутинной проверки авторизованности - UseAuthentication/UseAuthorization - из коробки.
+Поддержка нескольких источников: куки, Authorization header и другие.
+
+### Задачи аутентификации
+
+1. Определить, что пользователь не подделка
+2. Проверка уровня доступа к ресурсам.
+
+### Схема аутентификации
+
+Схема аутентификации - название обработчика + его настройки (Cookies, Google, OAuth, Bearer...).
+Следует указывать схему по умолчанию.
+
+### Создание аутентификационной куки
+
+```csharp
+var claims = newList<Claim> {     
+        newClaim(ClaimTypes.Name, user.Email),     
+        newClaim("FullName", user.FullName),     
+        newClaim(ClaimTypes.Role, "Administrator"), 
+        }; 
+var claimsIdentity = newClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme); // Здесь можно задать доп.параметры, например, RedirectUri, ExpiresUtcи т.д.
+var authProperties= newAuthenticationProperties();  
+await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,      
+                              newClaimsPrincipal(claimsIdentity),      
+                              authProperties);
+```
+
+### Удадение и обновление куки
+
+```csharp
+await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); // обновление
+var claims = newList<Claim> {     
+         newClaim(ClaimTypes.Name, user.Email),     
+         newClaim("LastChanged", {Database Value}) 
+         };  
+var claimsIdentity= new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);  
+await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+```
+
+### ASP.Net Core Identity
+
+Фреймворк для работы с пользователями. 
+Имеет поддержку многих стандартных случаев:
+
+- Смена пароля
+- Обновление почты
+- Подтверждение почты
+
+Нужно устанавливать отдельно, как NuGet пакет.
+
+
+### Возможности Identity
+
+- Готовая схема БД
+- Валидация пароля
+- Блокировка пользователей
+- 2FA
+- Токены для смены почты/пароля/username
+- Отслеживание изменений свойств пользователя
+- Возможность интеграции со сторонними провайдерами
+
+### Кастомизация Identity
+
+- Почти всё - шаблоны (нужно наследоваться от них и делать свое)
+- Свои сервисы хеширования/генерации токенов
+- Внешние провайдеры
+- Свои Claims
+
+### Сервисы Identity
+
+```csharp
+builder.Services.AddDefaultIdentity<DefaultUser>(options => 
+                options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<DefaultDbContext>();
+```
+
+### Настройка Cookie для Identity
+
+Куки настраиваются так же - через 
+
+```csharp
+builder.Services.ConfigureApplicationCookie(options => {
+    options.Cookie.Name = "SomeName";
+    options.LoginPath = "/Identiy/Account/Login"; // Можно поменять на свои
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+});
+```
+
+### Identity’s database schema
+
+Есть шаблон для баз данных. В ней определены таблицы (для SQL):
+- AspNetUsers
+- AspNetUserRoles
+- AspNetRoles
+- AspNetRoleClaims
+- AspNetUserTokens
+- AspNetUserLogins
+- AspNetUserClaims
+
+
+### Сервисы
+
+Из коробки доступны 2 основных необходимых объектов:
+ 
+- SignInManager
+- UserManager
+
+### Кастомизация пользователей
+
+Переопределяем базовый DbContext - IdentityDbContext (можно использовать IdentityUserContext - без ролей).
+Наследуемся от IdentityUser и добавляем/переопределяем что нужно. 
+Везде где нужен тип пользователя - даем наш тип.
+
+### Кастомные claims
+
+Можно хранить не только предопределенные типы Claims (Email, UserName...),
+но и свои - `new Claim("CustomClaimName", claimValue);`
+
+### Simple Authorization
+
+`[Authorize]`
+
+### Авторизация по ролям
+
+`[Authorize(Roles = "Admin, Manager")]`
+
+### Authorization Policy
+
+Политика авторизации - правило для доступа к ресурсу.
+Проверка не только того, что пользователь вошел в аккаунт,
+но и того, что соответствует какому-то правилу.
+
+### Добавление политики авторизации
+
+1. Добавляем политики авторизации в builder
+```csharp
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("OnlyInRussia", p => p.RequireClaim(ClaimTypes.Locality, "Russia"));
+});
+```
+2. Указываем политику в атрибуте `[Authorization("OnlyInRussia")]`
+
+### Ограничения политик (методы)
+
+- RequireAuthenticatedUser() - пользователь аутентифицирован
+- RequireClaim(claim) - есть claim с таким названием
+- RequireClaim(claim, value) - есть claim с таким названием и значением
+- RequireRole(role) - в одной из роли
+- RequireUserName(name) - UserName равен этому
+- RequireAssertion(handler) - свой тип проверки
+- AddRequirements(requirement) - добавить свои требования
+
+### RequireAssertion(handler)
+
+```csharp
+builder.Services.AddAuthorization(options => 
+    options.AddPolicy("DungeonMaster", policy => 
+        policy.RequireAssertion(context => 
+            context.User.HasClaim(c => 
+                c.Type == "Role"
+                && c.Value == "DungeonMaster"))));
+```
+
+### Пример авторизации
+```csharp
+[Authorize("DungeonMaster")]
+public IActionResult SlavesCount()
+{
+    return Ok(new {_slaves.Count});
+}
+
+[Authorize(Roles = "Slave, Timur")]
+public IActionResult GoToDungeon()
+{
+    if (_slaves.Any())
+    {
+        _slavesManager.AddSlaveToDungeon(_slaves.First());
+        return Ok();
+    }
+    return NotFound();
+}
+```
+
+### Пример своего ограничения
+
+1. Определяем тип своего ограничения
+```csharp
+class MinimumAgeRequirement
+{
+    public int MinimumAge { get; }
+    public MinimumAgeRequirement(int age)
+    {
+        MinimumAge = age;
+    }
+}
+```
+2. Определяем свой обработчик
+```csharp
+class MinimumAgeRequirementHandler: AuthorizationHandler<MinimumAgeRequiremnt>
+{
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MinimumAgeRequirement requirement)
+    {
+        var birthDate = DateTime.Parse(context.User.First(c => c.Type == ClaimTypes.DateOfBirth));
+        if ((birthDate.Today.Year - birthDate.Year) < requirement.Age) context.Successed(requirement);
+        return Task.CompletedTask;
+    }
+}
+```
+3. Регистрация своего ограничения
+```csharp
+builder.Services.AddAuthorization(options => 
+    options.AddPolicy("WorldOfTanksEnjoyers", policy =>
+        policy.Requirements.Add(new MinimumAgeRequirement(40))));
+```
+
+### Использование контекста MVC. 
+
+В объекте `AuthorizationHandlerContext` есть свойство Resource. Его тип - `object?`.
+Через него можно передавать различные объекты необходимые для проверки прав.
+
+### Resource-based authorization
+
+Мы можем проверять основываясь не только на AuthorizationContext,
+но и на объекте, предоставленном нам.
+
+Например, мы хотим передавать в handler объект документа, для проверки прав редактирования.
+Тогда мы можем вызвать метод `AuthorizeAsync` интерфейса `IAuthorizationService` и передать этот документ.
+Он будет доступен через свойство `Resource` объекта `AuthorizationHandlerContext`.
+
+В представления можно внедрять зависимости. Поэтому можно внедрить интерфейс IAuthorizationService и 
+уже в самом коде представления проверять уровень доступа (*.cshtml)
+
+```csharp
+@inject IAuthorizationService Service
+@if (await Service.AuthorizeAsync(User, "EditImage").Succeeded)
+{
+    <button id='enter-edit-mode'>Edit</button>_
+}
+```
 
 ## ASP.NET Core. Security
 
