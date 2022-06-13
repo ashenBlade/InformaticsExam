@@ -671,29 +671,176 @@ app.Run(async (context) =>
 
 ## ASP.NET Core. Services & DI
 
-Сервисы - зависимости
-Пример зависимости
-Проблемы прямых зависимостей
-S.O.L.I.D
-ServiceLocator
-DI анти-паттерны
-IoC (Inversion of Control)
-Свой тривиальный контейнер
-IServiceProvider
-Регистрация сервисов
-IServiceCollection Extension methods
-Время жизни
-Варианты регистрации
-Общая схема работы
-Типичные ошибки с Lifetime
-Резолв из transient сервиса scoped или singleton зависимостей
-GetService<TService>()
-Несколько сервисов или интерфейсов
-Рекомендации по созданию сервисов
-Disposal of services
-Рекомендации по использованию сервисов
+### Сервисы - зависимости
 
-5. Архитектура приложений ASP.NET Core MVC
+Сервис - объект, занимающийся какой-то логикой
+- Middleware зависит от сервисов
+- Сервис зависит от другого сервиса
+
+### Пример зависимости
+
+```csharp
+public class AzureTimeService: ITimeService
+{
+    private readonly IAzureRequester _requester;
+    public AzureTimeService(IAzureRequester requester)
+    {
+        _requester = requester;
+    }
+    
+    public DateTime GetCurrentTime()
+    {
+        return _requester.GetTime();
+    }
+}
+```
+
+### Проблемы прямых зависимостей
+
+- При изменении 
+  - Заменить класс во многих местах
+  - Зависимые классы тоже изменятся
+- Как тестировать?
+
+### S.O.L.I.D
+
+*S* - Single Responsibility, делать что-то одно, но хорошо
+*O* - Open/Closed, закрыт для модификаций, но открыт для расширений
+*L* - Liskov Substitution, использование отнаследованных классов в качестве базовых, даже не зная об этом
+*I* - Interface Segregation, много маленьких интерфейсов для специальной задачи
+*D* - Dependency Inversioin, используем интерфейсы и нигде конкретные классы
+
+### ServiceLocator
+
+Анти-паттерн: 
+- Все зависят от него
+- Должен знать обо всех
+
+### DI анти-паттерны
+
+1. Control Freak - не использование интерфейсов, везде создаешь все сам с помощью new()
+2. Bastard Injection - несколько конструкторов, с дефолтными значениями -> увеличение зависимостей
+3. Constrained Construction - требование иметь специализированный конструктор
+4. Service Locator - гранулированное получение зависимостей в отдельных частях кода, зависим от этого Service Locator
+
+### IoC (Inversion of Control)
+
+Если есть контейнер, который просто регистрирует у себя типы, а затем строит граф зависимостей, 
+и при требовании создать объект использует этот граф для построения - то получаем IoC контейнер.
+
+Динамически регистрируем необходимые типы, а контейнер сам разберется как создавать.
+
+- Autofac
+- Ninject
+- Unity
+- Castle Windsor
+- StructureMap
+- Встроенный
+- Кастомный
+
+### Свой тривиальный контейнер
+
+Есть класс Activator с методом CreateInstance. 
+Вызываем его, передавая тип, который нужно создать.
+Пусть он сам разберется, что туда класть.
+Главное - реализовать интерфейс `IServiceProvider`
+
+### IServiceProvider
+
+`IServiceProvider` - интерфейс IoC контейнера для использования в ASP.NET Core.
+Есть встроенный, но можно переопределить (так же как и обычные сервисы).
+За временем жизни следит ASP.NET Core.
+
+### Регистрация сервисов
+
+Регистрация сервисов в WebHostBuilder через метод свойства Services
+
+```csharp
+builder.Services.Add(SerivceDescriptor descriptor); // Общий вид
+```
+
+### IServiceCollection Extension methods
+
+Для удобства есть предопределенные методы
+
+```csharp
+builder.Services.AddTransient(); // Каждый раз новый
+builder.Services.AddScoped(); // Один на запрос
+builder.Services.AddSingleton(); // Один на всю работу
+```
+
+### Время жизни
+
+ASP.NET Core определяет 3 типа времени жизни:
+- Transient - на каждое требование создается новый экземпляр
+- Scoped - на каждый HTTP запрос будет создаваться ровно один экзепляр 
+(в более общем смысле - создается область видимости Scope, в которой живут объекты)
+- Singleton - создается один раз, на все время жизни приложения
+
+### Варианты регистрации
+
+- `Add{Transient|Scoped|Singleton}<TService, TImplementation>()`
+- `Add{Transient|Scoped|Singleton}\<TImplementation\>()`
+- `Add{Transient|Scoped|Singleton}\<TService\>(Func<ServiceProvider, TImplementation> creator);`
+- `AddSingleton\<TImplementation\>();`
+- `AddSingleton(TImplementation implementation);`
+
+`TryAdd{Transient|Scoped|Singleton}` - регистрация, если другие реализации не зарегистрированы
+
+### Общая схема работы
+
+1. Запрос приходит
+2. Создается ServiceProvider
+3. Создается Scope
+4. Создаются зависимости
+
+### Типичные ошибки с Lifetime
+
+Главная ошибка - Инъекция в конструктор сервисов с меньшим временем жизни:
+- Scoped в Singleton
+- Transient в Singleton
+
+### Резолв из transient сервиса scoped или singleton зависимостей
+
+- Инъекция в конструктор
+- Инъекция самого IServiceProvider - каждый раз самим создавать scope и резолвить
+
+### GetService\<TService\>()
+
+Во 2 случае мы инъектим IServiceProvider - получается ServiceLocator (нужно избегать).
+Само получение зависимостей - через метод расширения `GetService\<TService\>()`;
+
+### Несколько сервисов или интерфейсов
+
+Если на сервис зарегистрировано несколько реализаций, то:
+- Нельзя получить только 1
+- Получение через коллекции - `IEnumerable\<TService\>`, ` ICollection\<TService\>`
+
+### Рекомендации по созданию сервисов
+
+- Single Responsibility Principle - маленькие интерфейсы ответственные за небольшой функционал
+- Избегать состояния/статики (лучше уж синглтон)
+- Убрать прямые зависимости
+- Использовать Dependency Inversion (инъекция зависимостей через интерфейсы)
+
+### Disposal of services
+
+За очистку ответственнен IServiceProvider (не нужно самим вызывать Dispose()).
+Но если сервис создается вами, то нужно. 
+Например, если резолвишь фабрику, а эта фабрика уже сама создает объект IDisposable (здесь не контейнер создает!!)
+
+### Рекомендации по использованию сервисов
+
+1. Конструктор - синхронный, асинхронного резолва быть не может!
+2. В контейнере хранить только сервисы. Если нужна конфигурация - паттерн Options:
+резолвить специальный тип `IOptions\<TOptions\>`.
+3. Не использовать статический доступ
+4. Предпочитать DI ServiceLocator`у
+5. Если сервис Transient и реализует IDisposable - то, может получиться, что метод Dispose не вызовется,
+т.к. Dispose() будет вызван либо когда Scope выключится, либо когда приложение выключится
+6. Проверять, что время жизни в графе зависимостей - правильное (проверяется автоматически в Development режиме)
+
+## Архитектура приложений ASP.NET Core MVC
 
 Монолитное приложение
 All-in-one приложения
