@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
-
 namespace AspNetCoreSampleApp;
 
 public class TimeMiddleware: IMiddleware

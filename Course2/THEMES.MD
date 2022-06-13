@@ -456,33 +456,220 @@ Regex для Linux ~ [a-zA-Z_]{1,}[a-zA-Z0-9_]{0,}
 
 ## ASP.NET Core. Middleware
 
-Обработка запроса
-HttpContext
-HttpRequest
-HttpResponse
-Middleware
-Примеры
-Middleware Pipeline
-Выстраивание конвейера
-Методы Use, Map, Run, MapWhen
-Проблема с формированием ответа
-Кастомные компоненты Middleware
-Дополнительные параметры
-Порядок вызова
-Middleware обработки ошибок
-Middleware vs Services
-Маршрутизация в ASP.NET Core
-Конечные точки
-Шаблоны маршрутов
-Маршрутизация - Концепции
-Совпадение маршрутов
-Генерация URL-адресов
-Обработка ошибок
-Обработка ошибок HTTP: UseStatusCodePagesWithRedirects vs UseStatusCodePagesWithReExecute
-Использование Cookie
-Сессии
+### Обработка запроса
 
-4. ASP.NET Core. Services & DI
+1. Запрос принимается
+2. Выстраивается конвеер обработки запроса
+3. Запрос последовательно проходит по Middleware
+   1. Каждый из них обрабатывает запрос
+   2. Решает передавать ли дальше
+4. По достижении конца, проходит обратный путь
+
+### HttpContext
+
+HttpContext - абстрактный класс, представляющий контекст запроса:
+- Request - запрос
+- Response - ответ
+- User - информация о пользователе
+- Connection - соединение (порт, адрес...)
+- RequestServices - контейнер сервисов
+- Items - дополнительные объекты
+
+### HttpRequest
+
+Представляет собой контекст запроса:
+- Метод
+- Схема
+- Путь
+- Хост
+- Запрос
+- Протокол
+
+### HttpResponse
+
+Контекст ответа:
+- Статус код
+- Заголовки
+- Тело ответа
+- Writer - для записи ответа
+- Длина ответа
+- Тип ответа
+
+### Middleware
+
+Промежуточный слой обработки запроса.
+1. Обрабатывает запрос до и после передачи дальше
+2. Решает передавать ли дальше
+
+### Примеры
+
+```csharp
+app.Use(async (context, next) =>
+{
+    if (context.User.HasClaim(c => c.Type == "SlavesCount" && int.TryParse(c.Value, out var count) && count > 0))
+    {
+        await next();
+    }
+    else
+    {
+        await context.Response.WriteAsync("Not enough slaves count to perform action");
+    }
+});
+```
+
+### Middleware Pipeline
+
+- Двусвязный список middleware
+- Либо терминальный, либо содержит ссылку на следующий
+
+### Выстраивание конвейера
+
+С .NET 6:
+- Добавление в WebApplication перед `app.Run();`
+До:
+- В методе `Configure()`;
+
+### Методы Use, Map, Run, MapWhen
+
+Run:
+- Конечная точка обработки запроса (дальше не передает)
+
+Use:
+- Добавляет middleware в пайплайн
+
+Map:
+- Сопоставляет Path с требуемым, и если совпадает, то передает запрос
+на выполнение уже другому пути выполнения
+
+MapWhen:
+- Как `When`, но есть условие для выполнения
+
+### Проблема с формированием ответа
+
+После записи ответа в Response его менять нельзя:
+изменится Content-Length, Content-Type и т.д.
+
+### Кастомные компоненты Middleware
+
+Есть метод расширения `UseMiddleware<TMiddleware>();`. 
+Принимает класс, в котором:
+- Есть публичный метод `void Invoke(HttpContext context)` + Конструктор принимает `RequestDelegate`
+- Если публичный метод `Task InvokeAsync(RequestDelegate next, HttpContext context);`
+  
+Хорошая практика - для своих типов Middleware отдельные методы расширения 
+
+### Дополнительные параметры
+
+В конструтор класса Middleware можно делать инъекции зависимостей.
+
+### Порядок вызова
+
+Порядок вызовов такой же как и на этапе построения WepApplication.
+
+### Middleware обработки ошибок
+
+Перадает запрос дальше. На обратном пути проверяет на ошибки Response.
+
+### Middleware vs Services
+
+Middleware - ответственен за логику обработки запроса
+
+Services - ответственны за бизнес логику приложения
+
+### Маршрутизация в ASP.NET Core
+
+Включается с помощью `app.UseRouting()`;
+
+Для навигации используется концепция конечных точек.
+
+### Конечные точки
+
+Конечная точка, Endpoint - логическая конечная точка обработки запроса.
+Определяет делегат для обработки + метаданные (информацию из строки запроса...)
+
+### Шаблоны маршрутов
+
+Шаблоны представленны как Regex (не Regex). Общий вид такой
+`must-be-here/{lanuguage:regex(^\w\w-\w\w$)}/{parameter=default-value}/{date:date}/{**other}`
+- {...} - параметр для сопоставления
+- :regex(), :date - сопоставление со значением и его типом в адресе
+- =default-value - значение по умолчанию (если нет)
+- **other - все остальное
+
+### Маршрутизация - Концепции
+
+Запуск middleware:
+- До UseRouting:
+  - Изменение данных для работы с маршрутизацией: переписывание пути, изменение метода, изменение базового пути
+- После UseRouting:
+  - Добавление метаданных
+  - Проверка безопасности
+
+### Совпадение маршрутов
+
+Из всех путей выбирается наиболее конкретный.
+
+Более конктретные:
+1. Большее число сегментов (api/images - api/images/total)
+2. Сегмент с литеральным (вшитым) текстом (api/{version} - {method}/{version}) 
+3. Сегмент с ограничением ({date:date})
+   
+Менее конкретные:
+1. Всеобъемлющие параметры ({**args})
+
+### Генерация URL-адресов
+
+LinkGenerator - синглтон объект, для генерации ссылок.
+Используется в HTML helper, URL helper, Tag helper, ActionResult.
+Устанавливает связь между различными действиями/точками в MVC.
+
+### Обработка ошибок
+
+Можно создать специальную страницу, которая будет выдаваться при ошибке.
+`app.UseExceptionHandler('/Error')`
+
+В шаблонах MVC, RazorPages - уже встроена.
+
+### Обработка ошибок HTTP: UseStatusCodePagesWithRedirects vs UseStatusCodePagesWithReExecute
+
+Для статус кодов 400-599 есть специальные обработчики для каждого случая.
+
+Каждый из них может принимать строку, в которой можно указать параметр '{0}'. В него будет всталяться статус код.
+
+```csharp
+app.UseStatusCodePages();
+app.UseStatusCodePagesWithRedirect();
+app.UseStatusCodePagesWithReExecute();
+```
+
+### Использование Cookie
+
+Для кук есть свои свойства в Request и Response:
+
+```csharp
+context.Response.Cookies
+context.Request.Cookies
+```
+
+Причем в Response - только модифицировать, а в Request - только читать.
+
+### Сессии
+
+1. Добавляем сессии в Services
+```csharp
+builder.Services.AddSession();
+```
+2. Добавляем сессию в пайплайн
+```csharp
+app.UseSession();
+```
+3. Получаем доступ к сессии из объекта Session
+```csharp
+app.Run(async (context) => 
+    await context.Response.WriteAsync(context.Session.GetString("UserName")));
+```
+
+## ASP.NET Core. Services & DI
 
 Сервисы - зависимости
 Пример зависимости

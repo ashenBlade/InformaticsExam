@@ -1,5 +1,6 @@
 using AspNetCoreSampleApp;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Rewrite;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,19 +15,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseTime(); // Our custom middleware
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+
 app.Map("/am-i-gay", b =>
 {
     b.UseCors();
     b.Run(async ctx => await ctx.Response.WriteAsync("You are gay"));
 });
-
-app.UseTime(); // Our custom middleware
-
-
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
 
