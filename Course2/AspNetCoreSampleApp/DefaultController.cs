@@ -19,4 +19,10 @@ public class DefaultController: Controller
     {
         return Ok(_timeService.GetCurrentTime());
     }
+
+    [HttpGet("time/tomorrow")]
+    public ActionResult<DateTime> Time()
+    {
+        return Ok(DateTime.Now + TimeSpan.FromDays(1));
+    }
 }
