@@ -4,6 +4,65 @@
 
 ###  Data Communication Network Basis
 
+Broadcast domain - все узлы в одном domain получают сообщение, отправленное одним.
+
+Узлы коммункации:
+- Switches, Коммутаторы
+  - L2
+  - Близкая коммуникация (ПК рядом)
+  - Broadcast domain
+- Routers, Маршрутизаторы
+  - L3
+  - Перенаправление пакетов, обнаружение путей, WAN, NAT, безопасность
+  - Изоляция Broadcast domain
+- Firewalls, Файрвол
+  - Безопасность
+  - Проверка уровня доступа
+  - Управление коммункцией между сетями
+  - VPN
+  - Шифрование
+- Wireless, Беспроводные
+  - WLAN
+  - Радиоволны, лазер, инфракрасные сигналы
+  - IEEE 802.11 (Wi-Fi)
+  - AP - Access Point (Fat, Fit)
+  - AC - Access Controller
+
+Типы сетей:
+- LAN:
+  - Несколько км^2
+  - Подключение нескольких ПК 
+  - Ethernet, Wi-Fi
+- MAN:
+  - LAN, но больше
+  - Подключение баз данных, серверов, других LAN
+  - Ethernet (10-100 Gbit/s), WiMAX
+- WAN
+
+Типы топологий:
+- Star, Звезда - все подключены к центральному
+- Bus, Общая шина - все со всеми через 1 кабель
+- Ring, Кольцо - каждый с передним и задним (образуют кольцо)
+
+Топологии могут быть физическими и логическими. 
+Причем физ. и логич. не обязательно одинаковы.
+
+#### Вопросы
+1. A star network is robust and therefore not prone to faults. ***false***
+
+2. A router can break broadcast domains ***true***
+
+3. What is the disadvantage of a tree network? 
+
+- ***Nodes at higher layers will cause more serious network problems if they become faulty.***
+
+4. Which functions does a firewall provide?
+- ***Isolates networks of different security levels.*** 
+- ***Uses security policies to implement access control between networks of different security levels.***
+- ***Implements remote access.***
+- ***Implements data encryption and virtual private network services.***
+- ***Implements network address translation.***
+
 ###  Network Reference Model
 
 ###  Huawei VRP
