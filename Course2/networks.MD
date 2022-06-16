@@ -193,6 +193,72 @@ ARP, Address Resolution Protocol:
 
 ###  Huawei VRP
 
+VRP - ОС для устройств Huawei:
+- UI + управление
+- Control Plane + Forwarding Plane
+- Коммуникация между другими устройствами
+
+Файловая система: 
+- Файл конфигурации (Команды при запуске)
+- PAF файл (Поддержка фичей конкретного устройства)
+- Патч файл
+- Системные файлы
+
+Хранение доп. информации:
+- SD Card (конфигурация, системные файлы)
+- USB (для увеличения объема памяти)
+- SDRAM ~ память ПК
+- Flash (конфигурация, системные файлы)
+- NVRAM - Non Volatile (не изменяемая)
+
+Управление устройством + подключение:
+- Веб интерфейс (HTTP)
+- CLI (SSH, Telnet, Console port)
+
+VRP UI:
+- Console UI - через порт консоли/последовательный
+- VTY UI - через SSH(STelnet)/Telnet
+
+Уровни привилегий:
+- 0 - Visit (диагностика сети (ping, tracert) + некоторые display)
+- 1 - Monitoring (display)
+- 2 - Configuration
+- 3-15 - Management (системные операции, дебаг, FTP...)
+
+Команды:
+- Все организовано в виде *-view:
+  - system-view
+  - user-view
+  - когда вводишь interface GigabitEthernet 0/0/0 - входишь в GigabitEthernet-0/0/0-view
+  - Каждый view - поддерживает свои команды и свой контекст
+- Командная строка:
+  - Tab - autocomplete
+  - ? - команды начинающиеся на предыдущий ввод
+  - Есть шорткаты: Ctrl+U, Ctrl+A, Ctrl+C, Ctrl+X....
+  - Можно зарегистрировать свои шорткаты: Ctrl+L
+- Откат команды - undo + "команда для отката"
+
+Базовые команды:
+- pwd - текущий путь
+- dir - файлы в текущей папке
+- more - содержимое файла
+- cd - перейти по пути
+- mkdir - создать папку
+- ....
+
+Первоначальная настройка:
+- Дать название устройству - `sysname *Name*`
+- Настроить часовой пояс - `clock timezone *Timezone*`
+- Настроить время/дату - `clock datetime *date/time*`
+- Уровень привилегий - `command-priviledge level *level* view *для какого view*`
+- Логин/Пароль для пользователей - `user-interace vty 0 4`
+- Время простоя - `idle-timeout *timeout*`
+
+Сохранение настроек:
+1. Входим в User-View (`return`)
+2. `save`
+
+
 ###  Network Layer Protocols and IP Addressing
 
 ###  IP Routing Basics
