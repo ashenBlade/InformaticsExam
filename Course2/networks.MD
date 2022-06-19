@@ -1015,6 +1015,42 @@ RADIUS:
 
 ###  Network Address Translation
 
+NAT, Network Address Translation - технология отображения (+ проверки досутупа) адресов
+
+Типы NAT:
+- Static NAT
+  - Private IP -> Fixed Public IP
+  - 192.168.1.1 -> 32.56.9.129 (что видят другие)
+  - Для каждого устройства - свой отдельный IP
+  - Работает в обе стороны: Интернет -> Сеть + Сеть -> Интернет
+  - Настройка
+    - `nat static global *ip-outside* inside *ip-inside*` - заполнение таблицы
+    - `nat static enable`
+- Dynamic NAT
+  - Private IP -> Public IP (из пула свободных адресов)
+  - 192.168.1.1 -> Смотрю свободные Public IP -> 32.56.9.129 (а может выдаться и 32.56.9.130)
+  - Назначается временно - в этот период работает как Static NAT
+  - Настройка
+    - `nat address-group *group-index* *ip-start* *ip-end*` - создаем пул адресов
+    - `acl *number* + rule permit source *source-ip* *wildcard*` - настраиваем ACL
+    - `nat outbound *acl-number* address-group *group-index* no-pat` - включаем Dynamic NAT с созданным ACL и пулом, no-pat - без трансляции портов (будет дальше)
+- NAPT, Network Address and Port Translation
+  - Private IP -> Public IP + Port (из пула)
+  - 192.168.1.1 -> 32.56.9.129:3242
+  - Для одного Public IP может быть выделено несколько внутренних хостов
+  - Настройка - такая же как Dynamic NAT, только не указываем no-pat
+- Easy IP
+  - Private IP -> Public IP + Port (могут выбираться динамически)
+  - Возможна трансляция IP адреса и порта транспортного уровня
+  - Настройка:
+    - `nat outbound *acl-number*` - также как Dynamic NAT, но не нужен пул адресов - нужен только ACL
+  
+NAT server
+- Занимается отображением адресов.
+- Внешние клиенты могут обратиться к клиенту внутри локальной сети
+- Например, внутри есть веб-сервер с IP 192.168.0.1 и другие могут сделать к нему запрос на 32.56.9.129
+- `nat server protocol *protocol* global *ip-outside* inside *ip-inside* *port-inside*`
+
 ###  Network Services and Applications
 
 ###  WLAN Overview
