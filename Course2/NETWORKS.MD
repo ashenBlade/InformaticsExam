@@ -1458,6 +1458,26 @@ SDN, Software Defined Network:
 
 ###  Network Programmability and Automation
 
+Для автоматизации рутинных задач можно использовать языки программирования.
+В сетях наиболее используемым (после Bash) является Python:
+- Интерпретируемый - можно запускать везде, где есть интерпретатор
+- Много готовых библиотек (для сетей, автоматизации...)
+
+Вопросы:
+1. Python programs use indentation to represent code blocks. Statements in the same code block must have the same number of indented spaces.
+- *true*
+2.To improve code modularization and utilization, which of the following is used to describe a collection of objects with the same attributes and methods?
+- *class*
+3.Which of the following methods is used to write data to the telnetlib module?
+- *write* - метод из библиотеки
+4. Which of the following characters can be used as Python identifiers?
+- *Letters*
+- *Digits*
+- *Underscore*
+5. Which of the following are compiled high-level programming languages?
+- *C*
+- *C++*
+
 ###  Typical Campus Network Architectures and Practices
 
 
