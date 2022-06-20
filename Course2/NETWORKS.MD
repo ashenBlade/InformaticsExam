@@ -1177,6 +1177,81 @@ ESS, Extended Service Set - объединение нескольких AP.
 
 ###  WAN Technologies
 
+WAN, Wide Area Network
+- Покрывает огромные территории (км^2)
+- Состоит из множества LAN
+
+Типы устройств:
+- CE, Customer Edge - расположен у пользователя, соединяется только к PE 
+- PE, Provider Edge - расположен у поставщика, соединяется к CE и P
+- P, Provider - расположен у поставщика, соединяется только к PE (огрожден от мира, с помощью PE)
+
+PPP, Point-to-Point Protocol:
+- P2P соединение - только 2 устройства
+- PAP (Password Authentication Protocol) + CHAP (Challenge Handshake Authentication Protocol) - безопасность
+- LCP (Link Control Protocol) - согласование на L2
+- NCP (Network Control Protocol) - согласование на L3
+
+Настройка соединения между точками
+1. Установление L2 соединения. LCP:
+    1. Один шлет свою конфигурацию (что будет использоваться) - Configure-Request
+    2. Второй проверяет присланную конфигурацию и отвечает на него - Configure-Ack, затем шлет свой Configure-Request
+    3. Если в Configure-Request:
+       - Неправильные/неподдерживаемые параметры - Configure-Nak, затем другой присылает Configure-Request с другими параметрами
+       - Непонятно, что это за параметр - Configure-Reject, затем другой отправляет конфигурацию без этих параметров
+2. Аутентификация (Если была указана)
+   - PAP
+     1. Передача Username/Password в нешифрованном виде
+     2. Ответ: Authenticate-Ack - успех, Authenticate-Nak - провал
+   - CHAP
+     1. Сервер отправляет пакет (Challenge) (ID, рандомное число)
+     2. Клиент вычисляет MD5 хэш по формуле и отправляет результат (Response)
+     3. Сервер отправляет результат проверки
+3. Установление L3 соединения NCP
+   - Выбор L3 протокола (Часто IPCP)
+   - Согласование параметров конкретного протокола 
+   
+PPPoE, PPP over Ethernet:
+- Инкапсуляция PPP пакетов в Ethernet
+- L2
+
+Установление сессии:
+1. PPPoE Discovery
+   1. Клиент шлет PPPoE Request - PADI (Broadcast)
+   2. Свободные сервера отвечают - PADO (Unicast)
+   3. Клиент выбирает сервер - PADR (Unicast)
+   4. Сервер подтверждает клиента и создает сессию - PADS (Unicast)
+2. PPPoE Session.
+   1. Согласование PPP (как в обычном)
+   2. Сама работа (передача данных)
+3. PPPoE Terminating
+   1. Клиент шлет пакет серверу - PADT (обрыв сессии как только получил пакет)
+   
+> PAD* - PPPoE Active Discovery
+>> I - Initiation  
+>> O - Offer  
+>> R - Request  
+>> S - Session-confirmation 
+>> T - Termination
+
+Вопросы:
+1. During CHAP authentication, the password configured for a user is carried by PPP packets in plaintext.
+- *false* - это в PAP  
+2. Which of the following packet types is used by PPPoE to terminate a session?
+- *PADT* - T = Termination  
+3. If a packet with unmatched parameters is received during LCP negotiation, which of the following packet types is used by PPP to respond to the packet?
+- *Configure-Nak* - Nak - для тех, что не поддерживаются, но понятно для чего они (например, версия не поддерживается), Reject - для тех, которые вообще не понятны (даже название параметра)
+4. Which of the following authentication protocols are supported by PPP?
+- *PAP*
+- *CHAP*
+5. Which of the following packet types are used during PPP negotiation?
+- *LCP* - L2
+- *PAP* - аутентификация
+- *CHAP* - аутентификация
+- *IPCP* - L3
+
+
+
 ###  Network Management and OM
 
 ###  IPv6 Basics
