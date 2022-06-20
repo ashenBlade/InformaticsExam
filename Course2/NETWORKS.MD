@@ -1425,6 +1425,37 @@ require the network prefix and interface ID to be 64 bits.
 
 ###  Introduction to SDN and NFV
 
+OpenFlow - протокол управления процессом обработки данных в сетях.
+Лежит между контроллером и коммутатором.
+
+Типы сообщений:
+- Controller to Switch - отправляется контроллером для управления коммутатором
+- Asynchronous - сообщение коммутатора об обновлении его состояния
+- Symmetric - Hello, Echo, Error от коммутатора или контроллера
+
+SDN, Software Defined Network:
+- Orchestration application layer - то, что хочешь сделать
+- Controller layer - тот, кто думает как это сделать (само ядро SDN)
+- Device layer - тот, кто делает (получает инструкции от Controller layer)
+
+Да пошло все в жопу!
+
+Вопросы (просто запомнить):
+1. An OpenFlow switch forwards packets based on the flow table, and matches the destination MAC and IP addresses and other fields in the packets.
+- *true* 
+2. In the standard NFV architecture, which of the following modules is responsible for virtualization of the underlying hardware?
+- *NFVI*
+3. In the SDN architecture, which of the following interfaces is used for communication between the controller and an SDN switch?
+- *Southbound interface*
+4. In the OpenFlow architecture, which of the following packets are sent from the controller to a switch?
+- *Controller-to-Switch*
+- *Symmetric*
+5. Which of the following are NFV features?
+- *Partition division*
+- *Isolation*
+- *Encapsulation*
+- *Hardware independence*
+
 ###  Network Programmability and Automation
 
 ###  Typical Campus Network Architectures and Practices
