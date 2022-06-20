@@ -1304,6 +1304,125 @@ Network Management
 
 ###  IPv6 Basics
 
+Заголовок:
+1. Version
+   - 4 bits
+   - 0x06
+2. Traffic class
+   - 8 bits
+   - Приоритет пакета
+   - QoS
+3. Flow label
+   - 20 bits
+   - Поддержка real-time данных
+4. Payload length
+   - 16 bits
+   - Размер Payload 
+5. Next header
+   - 8 bits
+   - Есть ли дополнительные загловки 
+6. Hop limit
+   - 8 bits
+   - ~ TTL
+   - Кол-во роутеров через которые может еще пройти
+7. Source address
+   - 128 bits 
+   - Адрес отправителя
+8. Destination address
+   - 128 bits
+   - Адрес получателя
+
+Дополнительные заголовки:
+- Hop-by-hop 
+- IPv6 Authentication
+- TCP
+
+IPv6 Адрес:
+- 128 бит длина
+- Имеется маска подсети (как и в IPv4)
+- Сокращения
+  - :: - пропуск нулевых сегментов (если последние сегменты 0, то ::0)
+  - Начальные 0 можно опустить
+
+Классы IPv6 адресов:
+- Multicast - для определенной группы адресов (замена Broadcast)
+- Unicast
+  - Global - 2000::/3
+  - ULA, Unique local - FD00::/8
+  - Link-local - FE80::/10
+  - Special
+    - ::/128 - Unspecified
+    - ::1/128 - Loopback
+  - Others
+- Anycast - для любого (ближайшего) из указанной группы адресов
+
+> Broadcast нет
+
+Unicast = Network + Interface ID
+
+Назначение Unicast
+- Вручную
+- Автогенерация (DHCP)
+- EUI-64 - Interface ID = MAC (длина маски 64)
+
+ULA:
+- Только внутри своей сети - не маршрутизируется в Интернете
+- Начинается с FD::/8, но имеет свой псевдоглобальный префикс (все равно можно определить, что не из этой сети)
+
+LLA:
+- Назначается хостом себе
+- Network всегда равен FE80::/64 (после FE80 - только 0 в сетевой части - одна сеть)
+
+Multicast:
+- Начинается на FF (первые 8 бит - 11111111)
+- 4 бита - флаги (0000 - Transient, 0001 - Permanent)
+- 4 бита - область (scope):
+  - 0 - Reserved (0000)
+  - 1 - Interface-local (0001)
+  - 2 - Link-local (0010)
+  - 5 - Site-local (0101)
+  - 8 - Organization-local (1000)
+  - E - Global (1110)
+  - F - Reserved (1111)
+- Дальше 80 бит - 0
+- Последние 32 бит - ID группы
+  
+Solicited-Node Multicast Address:
+- Разрешение адресов в Local-link
+- DAD, Duplicate Address Detenction
+- Из моего Unicast создаю специальный Multicast:
+  - FE02::1:FF:*последние биты моего адреса*
+  - Если кто-то получает - адреса дублируются
+
+NDP, Network Discovery Protocol. Использует ICMPv6.
+
+Настройка адресов:
+- Stateful
+  - DHCPv6
+- Stateless
+  - ICMPv6 (RA и RS сообщения)
+    
+Разрешение MAC адресов
+- Клиент посылает NS сообщение (Source - он сам, Destination - solicited-address кому нужно) на роутер
+- Роутер ищет в своей таблице требуемый IPv6 и отправляет его клиенту NA
+- Клиент берет из полученного сооющения необходимые IPv6 и MAC
+
+Вопросы:
+1. An IPv6 unicast address consists of a network prefix and an interface ID. 
+Common IPv6 unicast addresses, such as global unicast addresses and link-local addresses, 
+require the network prefix and interface ID to be 64 bits.
+- *true*
+2. What is the length of an IPv6 address?
+- *128*
+3. What is the abbreviated version of the IPv6 address 2001:0AF8:0000:1234:FB00:0000:5000:EF14?
+- *2001:AF8:0:1234:FB00::5000:EF14* - только 1 секция может быть экранирована через ::
+4. Which of the following fields is used in a basic IPv6 header but not in an IPv4 header?
+- *Flow label* - отслеживание потока для Real-Time
+5. Depending on the IPv6 address prefix, which of the following address types can IPv6 addresses be classified into?
+- *Anycast*
+- *Multicast* - замена Broadcast
+- *Unicast*
+
 ###  Introduction to SDN and NFV
 
 ###  Network Programmability and Automation
