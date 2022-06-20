@@ -1480,6 +1480,47 @@ SDN, Software Defined Network:
 
 ###  Typical Campus Network Architectures and Practices
 
+Типичная архитектура состоит из нескольких разных областей (layers):
+- Core - соединяет другие слои
+  - Routing
+  - OSPF
+  - ACL
+  - Stacking (iStack, CSS, Eth-Trunk)
+- Access - соединяет конечные узлы (ПК, терминалы...)
+  - VLAN
+  - Link aggregation
+  - AAA
+  - Stacking (iStack, CSS, Eth-Trunk)
+  - STP
+- Aggregation - соединяет слои Access
+  - DHCP
+  - OSPF
+  - STP
+  - Routing
+- Egress - соединяет внешние сети (напр. Интернет) со внутренними
+  - NAT
+  - OSPF
+  - PPPoE
+- Data center - содержит базы данных и другие конечные узлы с данными
+- Network management - контроллеры сети (SDN, AC...)
+
+Вопросы:
+1. Certain terminals, such as servers and printers, can be allocated fixed IP addresses.
+- *true* - почему бы и нет?
+2. To conserve IP addresses, what mask size is used for IP addresses on router to router connections on an enterprise network?
+- *30* - точка-точка соединение
+3. On a campus network, which of the following functions can be enabled on access switches to prevent employees from accessing the unauthorized DHCP-enabled router?
+- *DHCP snooping* - смотреть в кадры напрямую, искать запрещенные DHCP Discover пакеты и отбрасывать их
+4. Which of the following technologies can be used on a campus network to improve network reliability?
+- *iStack* - соединить несколько коммутаторов в один (общая таблица коммутации)
+- *CSS* - добавить дополнительный роутер, чтобы если один вышел из строя, другой его заменил
+- *VRRP* - запасные роутеры-шлюзы-по-умолчанию
+- *Link Aggregation* - несколько физ. кабелей в один логический
+5. Which of the following are stages in the lifecycle of a campus network project?
+- *Planning and design*
+- *Deployment and implementation*
+- *Network O&M*
+- *Network optimization*
 
 -------
 ## Ответы на Final
