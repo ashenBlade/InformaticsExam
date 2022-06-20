@@ -1250,9 +1250,57 @@ PPPoE, PPP over Ethernet:
 - *CHAP* - аутентификация
 - *IPCP* - L3
 
-
-
 ###  Network Management and OM
+
+Network Management
+- Configuration - возможность настройки оборудования
+- Performance - минимальная загруженность и потребление ресурсов + производительность
+- Fault - если что-то отлетает, то система все равно работает
+- Security - авторизованный доступ
+- Accounting - записи об использовании сети (как, кто, когда...)
+
+Традиционные методы:
+- CLI - коммандная строка
+- GUI - спец. программы, HTTP
+- SNMP - посылать команды SNMP для конфигурирования
+  - Simple Network Management Protocol
+  - Устройство с запущенным на нем NMS (Network Management System) отслеживает состояние сети, при необходимости отправляет какие-то команды + 
+предоставляет интерфейс клиенту для мониторинга
+  - Версии:
+    - SNMPv1 - {Get|Set|Get-Next}-Request, Response, Trap (простые CRUD операции)
+    - SNMPv2(c) - +GetBulkRequest - сразу несколько результатов в одном ответе, Базовая безопасность
+    - SNMPv3 - + зашифрованный заголовок аутентификации
+  - Типы операций
+    - Query/Modify - запрос/модификация
+    - Trap - какое-то событие не связанное с Query/Modify случилось (например TTL истек)
+  - Каждое устройство имеет MIB, Management Information Bases - база данных с объектами устройства, которыми можно управлять:
+    1. OID - ID объекта
+    2. Status - статус объекта
+    3. Access permition - кто, может им управлять, и что делать
+    4. Data types - другие свойства объекта
+
+Выебистые методы:
+- iMaster NCE - платформа Huawei для управлением сетью:
+  - Использует NETCONF - механизм для управления
+  - Есть Client и Server NETCONF
+  - Установление сессии только по защищенному соединению (SSH, TLS, SSL...)
+  - Свой синтаксис для управления YANG
+
+Вопросы:
+1. Network devices enabled with SNMP run the agent process. The management process of an NMS interacts with the agent process through SNMP packets.
+- *true* - архитектура SNMP - Клиент/Сервер
+2. Which of the following packet types is used by SNMPv2c to proactively send traps to an NMS and requires a response from the NMS?
+- *Inform* - добавлен в v2 для подтверждения доставки Trap (т.к. UDP не гарантирует доставки)
+3. Unlike SNMPv1, SNMPv2c uses which of the following packet types to query OIDs in batches?
+- *GetBulk* - добавлен в v2
+4. Which of the following are attributes of managed devices defined in the MIB?
+- *OID* 
+- *Status*
+- *Access permission*
+- *Data types*
+5. Which of the following new security features that SNMPv3 provides over SNMPv1 and SNMPv2c?
+- *The MD5 algorithm is supported for user authentication*
+- *DES is supported for data encryption*
 
 ###  IPv6 Basics
 
