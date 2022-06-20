@@ -1109,6 +1109,72 @@ NTP, Network Time Protocol:
 
 ###  WLAN Overview
 
+WLAN, Wireless LAN - беспроводная локальная сеть.
+IEEE 802.11 - Wi-Fi.
+
+Устройства:
+- AC, Access Controller
+  - Логика учета клиентов (аутентификация, авторизация, DHCP...)
+- Fit AP
+  - Только раздает Wi-Fi
+  - Конфигурация - из AC
+- Fat AP
+  - Вся логика внутри них (AC + Fit AP)
+
+CAPWAP, Control And Provisioning Wireless Access Points:
+- Протокол управления и конфигурированием AP
+- Создание CAPWAP туннулей
+- Типы сообщений:
+  - Data - пользовательские данные, UDP 5247
+  - Control - управление AP, UDP 5246
+
+Соединение AP и AC
+- In-Path - только AC напрямую соединен с сетью, все данные идут через него
+- Off-Path - AC используется как источник конфигурации
+
+BSS, Basic Service Set - область, которую покрывает AP
+
+BSSID, BSS Identifier - ID области покрытия AP, обычно MAC
+
+SSID, Service Set Identifier - ID WLAN строкой, user-friendly
+
+VAP, Virtual AP - для создания нескольких AP из одного физического. 
+Например, один для клиентов, другой для сотрудников.
+
+ESS, Extended Service Set - объединение нескольких AP.
+Большие сети состоят из нескольких отдельных физических BSS.
+Чтобы переходя от одного к другому связь не терялась, нужно объединить их в один логический BSS.
+
+Установление CAPWAP туннеля:
+1. Обнаружение AC (Broadcast запросы)
+2. Создание туннеля
+   1. AC получает Join Request
+   2. AC аутентифицирует AP
+
+Поддержание туннеля:
+1. Data - обмен Keepalive
+2. Control - обмен Echo
+
+Безопасность:
+- WEP
+- WPA/WPA2
+- WPA/WPA2 PSK
+
+Вопросы:
+1. Two CAPWAP tunnels are established: data tunnel and control tunnel. They are both kept alive using Keepalive messages. 
+- *false* - для Control используется Echo
+2. Which of the following 802.11 protocols works only on the 5 GHz frequency band?
+- *802.11ac* - остальные используют 2.4GHz
+3. Which of CAPWAP message types is used by an AC to deliver configuration files to APs?
+- *Configuration Update Response* - Image - для данных, а Configuration Update Request - для информирования о доступных обновлениях
+4. Which of the following data frames is used by an AP to periodically broadcast its SSID?
+- *Beacon*
+5. Which of the following modes are used by APs to dynamically discover an AC?
+- *DHCP Mode*
+- *DNS Mode*
+- *Broadcast Mode*
+- Остался только *Manually...*, но он вручную, а нужен dynamically
+
 ###  WAN Technologies
 
 ###  Network Management and OM
