@@ -191,6 +191,27 @@ ARP, Address Resolution Protocol:
 - Switch - передача в текущей сети, используя заголовок L2
 - Router - передача между сетями, используя заголовок L3
 
+Вопросы:
+1. A MAC address is 48 bits (6 bytes) in length and consists of 12 hexadecimal digits.
+- *true*
+2. An ARP Reply packet is broadcast so that all hosts can receive it.
+- *false*
+3. Common data link layer protocols include Ethernet, PPPoE, and PPP.
+- *true*
+4. The Open System Interconnection (OSI) reference model divides a network into seven layers. Which of the following lists the seven layers in the correct order, from bottom to top?
+- *Physical, Data link, Network, Transport, Session, Presentation, Application*
+5. Which of the following port numbers is used by Telnet?
+- *23*
+6. What are functions of the network layer?
+- *Provide logical addresses for network devices*
+- *Send packets from source hosts to destination hosts*
+- *Route and forward data packets*
+7. Which of the following statements are true about the layers in the OSI reference model?
+- *Application layer: provides network services for applications and is closest to end users.*
+- *Transport layer: implements connection-oriented and non-connection-oriented data transmission, as well as error detection before retransmission.*
+- *Network layer: defines logical addresses for routers to determine paths and transmits data from source networks to destination networks.*
+- *Session layer: establishes, manages, and terminates sessions between entities at the presentation layer.*
+
 ###  Huawei VRP
 
 VRP - ОС для устройств Huawei:
@@ -257,6 +278,23 @@ VRP UI:
 Сохранение настроек:
 1. Входим в User-View (`return`)
 2. `save`
+
+Вопросы:
+1. There are two commonly used device management modes: CLI and web system.
+- *true*
+2. Which of the following statements about command functions is false?
+- *undo //Deletes a file*
+3. Which of the following are types of storage device?
+- *SDRAM*
+- *Flash*
+- *NVRAM*
+- *SD card*
+- *USB Flash drive*
+4. Which of the following functions are provided by the VRP?
+- *Provides a unified user interface and a unified management interface.*
+- *Implements functions of the control plane and defines interface standards of the forwarding plane.*
+- *Implements communication between the device forwarding plane and VRP control plane.*
+- *Eliminates the differences between the link layer and network layer of each product.*
 
 ###  Network Layer Protocols and IP Addressing
 
@@ -392,6 +430,19 @@ ICMP - Internet Control Message Protocol. Для управления, полу�
 
 Команда для настройки адреса: `ip address *ip-address* *mask*`
 
+Вопросы
+1. The router discards packets with a TTL value of 0.
+- *true*
+2. Which of the following is a private IP address?
+- *172.17.1.254
+3. How many IP addresses are available in network segment 172.16.0.0/30?
+- *2*
+4. Which of the following ICMP packets is used to detect the connectivity between the source and destination IP addresses?
+- *ICMP Echo*
+5. Which of the following IP addresses can be manually configured and used by host interfaces?
+- *10.2.3.4*
+- *192.168.100.254*
+
 ###  IP Routing Basics
 
 Для адресации к конкретному хосту в конкретной сети используются IP адреса.
@@ -465,6 +516,19 @@ CIDR (Classless Inter-Domain Routing) - безклассовая маршрут�
 - 192.168.12.0/22 + 192.168.10.0/23 + 192.168.9.0/21 + 192.168.14/0/23 = 192.168.8.0/21
 - В результате: минимизация таблицы маршрутизации
 - Может возникнуть цикл (для предотвращения - отбрасывание пакетов, приводящих к циклам)
+
+Вопросы
+1. The summary route of 172.16.1.0/24, 172.16.2.0/24, and 172.16.5.0/24 is 172.16.0.0/22.
+- *false* - правильно 172.16.0.0/23
+2. Which of the following fields is not included in the output of the display ip routing-table command?
+- *AdvRouter*
+3. What is the default preference of static routes?
+- *60*
+4. According to the longest match rule, which of the following routes will the data packet destined for 172.16.10.1 match?
+- *172.16.10.0/24*
+5. Which of the following are link-state routing protocols?
+- *OSPF*
+- *IS-IS*
 
 ###  OSPF Basics
 
@@ -562,6 +626,21 @@ OSPF Routing Table - таблица маршрутизации только дл
 - Retransmit-Interval, RxmtInterval, Повторная передача LSA (при неудачи посылки LSA, время между отправками) - 5с, макс 60мин
 - Transmit-Delay, Время передачи LSA (время корректности записи = время содержания записи в таблице + время передачи(Transmit-Delay)) - 1с (для всех каналов)
 
+Вопросы
+1. On an MA network, the final state of the OSPF neighbor relationship between DR others is 2-way.
+- *true* - в данном случае MA значит соединены одним проводом, и в результате получается отношение 2-way - каждый получил от других Hello пакет
+2. Which of the following packets are used by OSPF to discover and maintain neighbor relationships?
+- *Hello*
+3. By default, what are the OSPF cost values of a serial port working at 1.544 Mbit/s, FE interface, and GE interface, respectively?
+- *64, 1, 1*
+4. Which of the following tables is used by OSPF to store link status information?
+- *OSPF LSDB*
+5. Which of the following are OSPF network types?
+- *P2P*
+- *P2MP*
+- *NBMA*
+- *Broadcast*
+
 ###  Ethernet Switching Basics
 
 Ethernet - протокол L1 и L2. 
@@ -623,6 +702,9 @@ MAC, Media Access Control - для идентификации NIC:
 - Broadcast - всем узлам в сети (на L2 уровне) - FF-FF-FF-FF-FF-FF
   - Ethernet frame, у которого broadcast MAC называется multicast
   - Для групповой рассылки
+- Multicast - отображаются в Multicast IP
+  - Начинаются на 0x01005e + следующий (25) бит равен 0, остальное - из IP адреса
+  - Multicast IP - 224.0.0.0/4 -> берем последние 23 бита IP и вставляем в последние MAC
 
 Коммутаторы:
 - Уровни работы:
@@ -663,6 +745,21 @@ MAC, Media Access Control - для идентификации NIC:
 3. Я получил ответ. Узнал требуемый MAC адрес получателя.
 4. Отправляю сами данные - настоящий Ethernet frame с только что узнанным MAC адресом получателя
 
+Вопросы
+1. A switch floods unknown unicast frames and frames whose destination MAC address is a broadcast MAC address.
+- *true* - коммутатор отбрасывает кадры 
+2. What type of MAC address is 01-00-5e-00-00-01?
+- *Multicast* - начинется на 01-00-5e + 25 бит = 0
+3. Which of the following actions does a switch take by default after it receives an unknown unicast frame?
+- *Learns the mapping between the source MAC address and interface that receives this data frame, and floods this data frame. correct*
+4. Which of the following ARP packets is used to request the MAC address corresponding to an IP address?
+- *ARP Request*
+5. Which of the following fields are contained in an Ethernet frame in the IEEE 802.3 format?
+- *Source MAC*
+- *Destination MAC*
+- *FCS*
+- *Length*
+
 ###  VLAN Principles and Configuration
 
 Проблемы Ethernet:
@@ -688,6 +785,8 @@ IEEE 802.1Q - добавляет поле VLAN Tag (4 байта) в Ethernet Fr
     - 0 - канонический кадр
     - 1 - не канонический кадр (FDDI, Token Ring)
   - VLAN ID, 12 бит - к какому VLAN относится
+    - 1 - 4094
+    - 0 и 4095 - зарезервированы
 
 Компьютеры шлют кадры без VLAN тэгов. 
 Их назначением занимается коммутатор.
@@ -733,6 +832,19 @@ IEEE 802.1Q - добавляет поле VLAN Tag (4 байта) в Ethernet Fr
   - `port link-type hybrid`
   - `port hybrid pvid vlad *id*` - назначение PVID
   - `port hybrid untagged vlan *ids*` - какие назначать нетегированным
+
+Вопросы
+1. An access interface cannot process VLAN-tagged data frames, and immediately discards them upon receipt.
+- *False* - пропускает, только если тэг в полученном допустимый, иначе отклоняет
+2. What is the TPID value of an 802.1Q-tagged frame?
+- *0x8100* - это база!
+3. Which of the following is a valid VLAN ID?
+- *4094*
+4. Based on which of the following cannot VLANs be assigned?
+- *Transport-layer protocol* - VLAN работает на L2
+5. Which of the following interfaces can process data frames carrying multiple VLAN tags?
+- *Trunk*
+- *Hybrid* - Access только 1 разрешенный, а Bridge - не существует
 
 ###  STP Principles and Configuration
 
@@ -835,6 +947,22 @@ STP имеет большое время схождения - 50с (2 * ForwardD
 
 MSTP, Multiple STP - версия STP для нескольких сетей (VLAN)
 
+Вопросы
+1. By default, a switch runs RSTP.
+- *false* - STP по умолчанию
+2. 2. The bridge IDs of SW1, SW2, SW3, and SW4 are 4096.4c1f-aabc-102a, 4096.4c1f-aabc-102b, 4096.4c1f-aabc-001a and 8192.4c1f-aabc-112b, respectively. If the four switches are on the same Layer 2 network and have STP enabled, which switch acts as the root bridge?
+- *SW3* - у него наименьшая (Bridge Priority, MAC) пара
+3. What is the default Forward Delay value in STP?
+- *15s* - значение по умолчанию для NBMA (мы на них учились, современный Ethernet)
+4. The root ID, bridge ID, interface ID, and root path cost (RPC) are the main fields used to determine priorities of configuration BPDUs. 
+To select a superior configuration BPDU, in which of the following sequences does a switch compare these fields?
+- *Root ID, RPC, Bridge ID, Interface ID*
+5. Which of the following fields are contained in a configuration BPDU?
+- *Root ID*
+- *Port ID*
+- *Bridge ID*
+- *Forward Delay*
+
 ###  Inter-VLAN Communication
 
 Общение через VLAN может происходить на L2 и L3 уровнях.
@@ -872,6 +1000,19 @@ MSTP, Multiple STP - версия STP для нескольких сетей (VL
 Таким образом, из своей физической L3 сети мы не выходим и 
 общаемся через различные VLAN. 
 
+Вопросы
+1. During Layer 3 communication, the source and destination MAC addresses of a packet are changed each time it passes through a Layer 3 device.
+- *true* - от коммутатора до коммутатора
+2. To implement inter-VLAN communication through sub-interfaces, which of the following commands needs to be configured for VLAN termination on the sub-interfaces?
+- *dot1q termination vid vlan-id*
+3. Which of the following statements about a Layer 3 switch is false?
+- *A Layer 3 switch can forward packets only at Layer 3* - L3 коммутация просто доп. функциональность
+4. Which of the following statements is false about routing on Layer 3 switches?
+- *A Layer 3 switch forwards the packet to the next hop specified in the matching routing entry, without re-encapsulating the data frame* - как минимум изменяет MAC в L2 заголовке
+5. If sub-interfaces are configured to implement inter-VLAN communication, which of the following interfaces should be configured to connect a switch to a router?
+- *Trunk*
+- *Hybrid*
+
 ###  Eth-Trunk iStack and CSS
 
 Eth-Trunk - технология аггрегирования Ethernet кабелей (каналов).
@@ -896,11 +1037,10 @@ Eth-Trunk - технология аггрегирования Ethernet кабе�
   - LACPDU = приоритет устройства + MAC + приоритет интерфейса + номер интерфейса
   - Можно настроить макс. кол-во активных интерфейсов (другие - резервные)
   - Алгоритм:
-  1. Выбирается главный - наименьший приоритет устройства
+  1. Выбираются Actor (главный) - наименьший приоритет устройства, и Partner (зависимый)
   2. Выбираются активные интерфейсы. Меньшее значение приоритета. Если одинаковые - меньший номер интерфейса.
 - Балансировка нагрузки
   - На основании MAC или IP (и в ту, и в другую, и в обе стороны одновременно)
-  - 
 
 iStack, Intelligent Stack - несколько физических коммутаторов объединяются в один логический.
 Соединяются через специальный кабель. 
@@ -916,6 +1056,19 @@ CSS, Cluster Switch System - несколько физических комму�
 - Увеличение пропускной способности (аггрегация каналов, Eth-Trunk)
 - Увеличение кол-ва клиентов - просто добавить еще один коммутатор в специальный разъем (iStack)
 - Не требуется MSTP (для коммутаторов использующих CSS)
+
+Вопросы
+1. Configuring the lower threshold for the number of active interfaces in an Eth-Trunk ensures that the Eth-Trunk has the minimum required bandwidth
+- *true*
+2. What is the default LACP interface priority?
+- *32768*
+3. Which of the following configurations can be different on member interfaces in an Eth-Trunk interface?
+- *Spanning Tree Configurations*
+4. Which of the following statements is false about selecting active links in LACP mode?
+- *The Actor enables active interfaces and disables backup interfaces, and notifies the device on the other end of the selected active interfaces based on the physical interface status*
+5. Which of the following fields in an LACPDU is used to select the Actor?
+- *Device priority*
+- *Device MAC address*
 
 ###  ACL Principles and Configuration
 
@@ -947,6 +1100,19 @@ ACL, Access Control List - технология, использующаяся д
 2. Расширенный
    - 3000-3999
    - То, что в Базовом + типы IPv4, типы ICMP, номера портов TCP/UDP
+
+Вопросы
+1. An advanced ACL can match the source and destination port numbers of packets, enabling it to filter TCP packets with a specified destination port number
+- *true*
+2. What is the default increment of ACL rule IDs?
+- *5*
+3. What is the number range of advanced ACLs?
+- *3000-3999*
+4. If the number of an ACL is 4010, which of the following fields can the ACL match?
+- *Source MAC address, destination MAC address, and L2 Protocol type*
+5. Which of the following packets can match the ACL rule: rule 1 permit tcp source any destination 192.168.1.1 0.0.0.0 destination-port eq 80?
+- *Source IP address: 10.0.0.1; destination IP address: 192.168.1.1; source port number: 30000; destination port number: 80; transport layer protocol: TCP*
+- *Source IP address: 10.1.1.1; destination IP address: 192.168.1.1; source port number: 62012; destination port number: 80; transport layer protocol: TCP*
 
 ###  AAA Principles and Configuration
 
@@ -1013,6 +1179,20 @@ RADIUS:
 7. `local-user *username* service-type { {terminal|telnet|snmp} | ppp | none }` - настраиваем как пользователь будет подключаться
 8. `local-user *username* privilege level *level*` - устанавливаем уровень доступа 
 
+Вопросы
+1. When receiving a user access request, the NAS determines the domain to which the user belongs based on the user name, and performs user management and control based on the AAA schemes configured for the domain.
+- *true*
+2. Which of the following roles is not included in the common AAA network architecture?
+- *Portal server*
+3. What are the transport layer protocol and authentication port number used by RADIUS?
+- *UDP, 1812*
+4. Which of the following authorization modes is not supported by AAA?
+- *Mutual authorization*
+5. Which of the following concepts are involved in AAA?
+- *Authentication*
+- *Authorization*
+- *Accounting*
+
 ###  Network Address Translation
 
 NAT, Network Address Translation - технология отображения (+ проверки досутупа) адресов
@@ -1050,6 +1230,20 @@ NAT server
 - Внешние клиенты могут обратиться к клиенту внутри локальной сети
 - Например, внутри есть веб-сервер с IP 192.168.0.1 и другие могут сделать к нему запрос на 32.56.9.129
 - `nat server protocol *protocol* global *ip-outside* inside *ip-inside* *port-inside*`
+
+Вопросы
+1. NAPT translates not only IP addresses but also port numbers to implement 1:N mappings between public and private addresses.
+- *true* - Static, Dynamic NAT выделяют только IP, но не порты
+2. Which of the following NAT technologies can only use an interface address as the post-NAT public address?
+- *Easy IP* 
+3. Which of the following NAT technologies can be deployed on egress network devices to enable external users to access only a TCP port of an intranet server?
+- *NAT Server* - тот, кто занимается отображением адресов
+4. Which of the following are not translated by NAPT?
+- *Destination port number*
+- *Destination IP address*
+5. Which of the following NAT technologies can be used to enable external users to proactively access an intranet server?
+- *Static NAT*
+- *NAT Server*
 
 ###  Network Services and Applications
 
@@ -1106,6 +1300,21 @@ DNS, Domain Name System:
 NTP, Network Time Protocol:
 - Синхронизация времени на устройствах
 - UDP, 123
+
+Вопросы
+1. FTP works in active or passive mode. TCP port 20 is used in both modes.
+- *false* - только в активном режиме, в пассивном выделяется рандомный порт
+2. What is the level of the domain '.com' in the URL www.huawei.com?
+- *Top-level domain* - первое слово с конца
+3. Which of the following messages is sent by a DHCP server to carry the IP address assigned to a client during DHCP interaction?
+- *DHCP Offer* 
+4. Which of the following is the default destination port number of the FTP control channel?
+- *21*
+5. Which of the following parameters can be assigned by a DHCP server to a DHCP client?
+- *DNS server address*
+- *Gateway address*
+- *Local IP address*
+- *Mask*
 
 ###  WLAN Overview
 
@@ -1523,6 +1732,7 @@ SDN, Software Defined Network:
 - *Network optimization*
 
 -------
+
 ## Ответы на Final
 
 ### TRUE/FALSE
