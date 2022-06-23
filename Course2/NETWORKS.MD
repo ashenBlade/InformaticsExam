@@ -1917,3 +1917,418 @@ An administrator wants to allocate … hosts ***(2 ответа)*** ***(172.16.4
  - Refer to the following ACL configuration on a device … number 200 ***(2 otveta)*** ***(Packets with the source IP address 10.1.1.2 will be…)*** ***(Packets with the source IP address 10.1.1.3)***
  - As shown in the following networking, the interfaces connecting R1, R2, R3 … performed ***(2 otveta)*** ***(Run the … on GE0/0/1 of R1)*** ***(Run the … on GE0/0/3 R2)***
  - Which of the following are valid MAC address types?***(Всё, кроме Anycast MAC address)***
+
+
+## Ответы на Гугл
+
+1. Which of the following port roles are added to Rapid Spanning Tree Protocol(RSTP) compared with STP?"         	"Какая из следующих ролей порта добавлена ​​в протокол быстрого охватывания дерева(RSTP) по сравнению со STP?
+- **Alternate**
+- **Backup**
+- Designated
+- Root
+
+Пояснение: в STP есть только 2 роли порта: Root, Designated 
+
+2. A network administrator wishes to assign an IP address to a router interface G0/0/0. Which of the following IP addresses can be assigned?"	"Администратор сети желает назначить IP -адрес на интерфейс маршрутизатора G0/0/0. Какой из следующих IP -адресов может быть назначен?
+- 127.3.1.4/28 - Loopback
+- 192.168.10.112/30 - Private IP
+- 237.6.1.2/24 - Class D, Multicast
+- **145.4.2.55/26**
+
+3. The administrator cannot use telnet to manage the AR2200. The administrator is able to verify connectivity to the router and has been informed that other administrators have no difficulties using telnet.Which statements describe the possible reasons for this problem?	                Администратор не может использовать telnet для управления AR2200. Администратор может проверить подключение к маршрутизатору, и ему сообщили, что другие администраторы не испытывают трудностей с использованием telnet. Какие утверждения описывают возможные причины этой проблемы?
+- **The user has been deleted.**
+- The telnet service in the AR2200 router has been disabled. - нет т.к. другие могут зайти
+- **The user’s status has been blocked**
+- The user’s privilege level has been changed to 0 - он все равно мог бы зайти
+
+4. What is the TPID value defined by IEEE 802.1Q? Какое значение TPID определяется IEEE 802.1Q?
+- 0x9100 - 802.1ad
+- 0x7200 - 802.3cg
+- 0x8200 - CVLAN & SVLAN
+- **0x8100** - 802.1Q
+
+5. When the lost accesses web service of the server, the value of the "Protocol" field at the network layer is 6.  |  Когда утерянные веб -службы сервера обращаются к сетевому серверу, значение поля «протокола» на сетевом уровне составляет 6.
+- **True**
+- False
+
+6. In a broadcast address, all host bits are set to 1 and a broadcast address can be used as a host address. 	В трансляционном адресе все биты хоста устанавливаются на 1, а адрес трансляции может использоваться в качестве хост -адреса.
+- True
+- **False** - все биты = 1 - да, но как хост быть не может
+
+7. What is the UDP port number used by the DHCPv6 server?	      Какой номер порта UDP используется сервером DHCPV6?
+- **547**
+
+8. Which of the following working modes are supported by Huawei Enterprise API?	   Какой из следующих рабочих режимов поддерживается Huawei Enterprise API?
+- **FIT**
+- **FAT**
+- Local - не существует
+- Cloud - не существует
+
+9. Ping 10.0.0.2: 56 data bytes, press CTRL_C to break             Reply from 10.0.0.2: bytes=800 Sequence=1 ttI=255 time=2 ms                    Reply from 10.0.0.2: bytes=800 Sequence=2 ttl=255 time=10 ms               --- 10.0.0.2 ping statistics ---2 packet(s) transmited              2 packet(s) received                0.00% packet loss                 round-trip min/avg/max = 2/6/10 ms                  Администратор сети использует команду Ping для проверки подключения к пункту назначения 10.0.0.2 на маршрутизаторе серии Huawei AR. Какой оператор, касающийся вывода, является правильным?"  
+- **The network administrator used the command ping -c 2 -s 800 10.0.0.2**
+
+Пояснение: ping - для пропинговки, -c - кол-во раз (в выводе было 2 записи), -s - размер сообщения (bytes=800)
+
+10. \[R1\]display interface GigabitEthernet0/0/0 GigabitEthernet0/0/0 current state - Administratively DOWN Line protocol current state : DOWN Refer to the display output. What can be determined based on the output of the display command?"	"[R1] отображение интерфейса GigabitEthernet0/0/0GigabitEthernet0/0/0 Текущее состояние - административно вниз Линейное протокол Текущее состояние: вниз Обратитесь к выводу дисплея. Что можно определить на основе вывода дисплея командование?
+- **Interface Gigabit Ethernet 0/0/0 has been manually shut down by an administrator**
+
+Пояснение: `current state - Administratively DOWN` - порт отключен административно (кем-то)
+
+11. Which of the following statements is true about the alternate port in RSTP?           	Какое из следующих утверждений верно относительно альтернативного порта в RSTP?
+- **An alternate port acts as a backup of the root port and provides an alternate path from the designated bridge to the root bridge**
+
+12. What are the roles of OSPF protocol DR and BDR?	Каковы роли протокола OSPF DR и BDR?
+- **Reduce the number of exchanges of link state information**
+- **Reduce the number of adjacencies**
+- Reduce the time to establish adjacency - время сходимости зависит от таймеров
+- Reduce the types of OSPF protocol packets - DR, BDR не вляют на типы пакетов определенные в стандарте
+
+13. Which of the following commands can be used to view the router's CPU usage?	            Какая из следующих команд можно использовать для просмотра использования процессора маршрутизатора?
+- **display cpu-usage**
+
+14. In the network shown in the figure, the administrator hopes that all hosts cannot access the web service (the port number is 80), and other services are normally accessed, so in the interface configuration of G0/0/1, traffic-filter outbound needs todefine which ACL rule?                   В сети, показанной на рисунке, администратор надеется, что все узлы не могут получить доступ к веб-службе (номер порта 80), а к другим службам доступ осуществляется нормально, поэтому в конфигурации интерфейса G0/0/1 для фильтрации исходящего трафика необходимо определить какое правило ACL?
+- **acl number 3000 rule 5 deny tcp destination-port eq www rule 10 permit ip**
+
+15. Примените следующий ACL к Telnet. Какое из следующих утверждений является верным?                       acl number 2000            rule 5 deny source 172.16.105.3 0            rule 10 deny source 172.16.105.4 0            rule 15 deny source 172.16.105.5 0            rule 20 permit
+- **The device whose IP address is 172.16.105.6 can use the Telnet service**
+
+Пояснение: это единственный IP, который в данном acl не отвергается
+
+16. Какую скорость разгоняет 802.11g?
+- **54 Мбит/с** - медленный пидарас!
+
+17. Which of the following statements is true about root bridge election of STP?          	Какое из следующих утверждений верно относительно выборов Root Bridge STP?
+- **The device with the smallest bridge priority becomes the root bridge**
+- The device with the largest bridge priority becomes the root bridge - ортогонально правильному
+- If the bridge priorities of devices are the same, the device with the largest MAC address becomes the root bridge - с наименьшим MAC
+- If the bridge priorities are the same, the device with the largest number of ports becomes the root bridge - кол-во портов не играет роли
+
+18. Which of the following parameters are used for STP calculation on a switching network running STP?	        Какой из следующих параметров используется для расчета STP в сети коммутации, работающей на STP?
+- **Root path cost**
+- **Port ID**
+- Forward Delay - просто передается
+- **Bridge ID**
+
+19. The network administrator has decided to configure link aggregation in the enterprise network. Which of the following represent advantages of link aggregation? 	Администратор сети решил настроить агрегацию ссылок в корпоративной сети. Что из следующего представляет преимущества агрегации ссылок?
+- **Load balancing**
+- Improved security
+- **Enhanced reliability**
+- **Improved bandwidth**
+
+20. Which of the following descriptions about STP designated ports is correct?            	Какое из следующих описаний, обозначенных STP, является правильным?
+- **Designated ports are responsible for sending BPDU to connected network segments**
+- Designated ports represent the path leading to the root switch - это Root port делает
+- Designated ports forward frames destined for the root switch - это Root port делает
+- Each bridge can have only one designated port - нет, к примеру Root Bridge - у него все порты Designated
+
+21. In OSPFv3, router Ids can be used automaticall generated by the system  |  В OSPFV3 идентификаторы маршрутизатора могут использоваться автоматически, генерируемые системой
+- **False** - так же как и в старых - вручную
+- True
+
+22. What is the default value of switch priority when STP is enabled on Huawei switch?             	Каково значение по умолчанию приоритета переключения, когда STP включен на коммутатор Huawei?
+- **32768**
+- 16384
+- 4096
+- 8192
+
+23. <Huawei>display startup     MainBoard:               Startup system software: sd1:/ar2220-v200r003c00spc200.cc               Next startup system software: sd1/ar2220-v200r003c00spc200.cc               Backup system software for next startup: null     Startup saved-configuration file: null     Next startup saved-configuration file: null     Startup license file: null               Next startup license file: null               Startup patch package: null               Nest startup patch package: null               Startup voice-files: null               Next startup voice-files: null     Обратитесь к выводу дисплея. Какое утверждение ложное?
+- **The next startup system software cannot be changed** - оно всегда может быть изменено, пока не перезагрузился (просто файл поменять)
+
+24. When configuring a static route on a broadcast interface, you must specify the next-hop IP address.	При настройке статического маршрута на интерфейсе вещания необходимо указать IP-адрес следующего хода.
+- **False** 
+- True
+
+25. The function of OSPF hello message is            Функция сообщения OSPF hello заключается в следующем
+- **Neighbor discovery**
+- **Maintain neighbor relationships**
+- Synchronize the LSDB of the router - для этого LSU/DBD сообщения
+- Update LSA information - для этого LSU сообщения
+
+26. With what kind of routers does a DRother router exchange link state information and route information?	С какими маршрутизаторами информация состояния и маршрута обмена маршрутизатором Drother Router?
+- **BDR**
+- DRother - DRother напрямую говорит только с DR и BDR
+- All OSPF neighbors - DRother напрямую говорит только с DR и BDR
+- **DR** 
+
+
+Примечание: DRother - это не DR или BDR (все остальные)
+
+27. UDP does not guarantee data transmission reliability and does not provide packet sorting and traffic control functions. It is suitable for the traffic that has low requirements for data transmission for data transmission reliability, but high requirement for the transmission speed and delay. 	UDP не гарантирует надежность передачи данных и не обеспечивает функции сортировки пакетов и управления трафиком. Он подходит для трафика, который имеет низкие требования к надежности передачи данных, но высокие требования к скорости передачи и задержке.
+- **True**
+- False
+
+28. There is no channel overlap in the 14 available frequency bands in the 2.4GHz frequency band | Отсутствует перекрытие каналов в 14 доступных частотных диапазонах в полосе частот 2,4 ГГц
+- **False** - 14 канал стоит дальше остальных, но все равно перекрывает другие
+- True
+
+29. Which of the following descriptions about Trunk port and Access port is correct?    Какое из следующих описаний Trunk  порта и Access  порта является верным?
+- **Access port can only send untagged frames** - предполается что любой проходящий через Access будет иметь требуемый VLAN, так что необходимость в доп. тегировании - нет
+
+30. You can configure a static route on a broadcast interface by specifying the next-hop IP address or outbound interface  |  	Вы можете настроить статический маршрут на интерфейсе вещания, указав IP-адрес следующего хода или исходящий интерфейс
+- **True**
+- False
+
+31. If an Ethernet data frame is forwarded by the switch and is added with two VLAN tags, how many extra bytes are added to the data frame?	          Если кадр данных Ethernet пересылается коммутатором и добавляется двумя тегами VLAN, сколько дополнительных байтов добавляется в кадр данных?
+- **4**
+
+32. Which of the following fields is/are contained in an IPv6 packet header?	Какое из следующих полей содержится в заголовке пакета IPv6?
+- **Version**
+- **Traffic class**
+- **Next header**
+- TOS - это че??
+
+33. Which of the following statements regarding the router ID in OSPF are incorrect?	 Какое из следующих утверждений, касающихся идентификатора маршрутизатора в OSPF, неверно?
+- **The router ID must be the IP address of an OSPF router interface** - Router ID просто выглядит как IP, но не обязательно им является, можно любой Router ID ему дать
+- **The router ID of OSPF routers in the same area must be the same, but can be different in different areas** - скорее наоборот - в одной Area - разные, но в разных Area - могут повтряться
+- A router running OSPF must have a router ID for it to operate properly
+- **The router ID must be configured manually** - может и автоматически быть настроен
+
+34. Сколько состояний у RSTP ?
+- **3** - из 5 состояний STP убрали 2
+
+35. The link aggregation interface can only be used as a Layer 2 interface.        Интерфейс агрегации ссылок можно использовать только в качестве интерфейса уровня 2.  
+- **False** - можно и на L3
+- True
+
+36. What percentage does the DHCP client expect to send the lease renewal message for the first time?                     Какой процент ожидает клиент DHCP при первой отправке сообщения о продлении аренды?
+- **0.5**
+
+37. Before the STA associates with the AP, it needs to exchange some messages to obtain the SSID. What are these messages?                     Прежде чем STA свяжется с точкой доступа, ему необходимо обменяться некоторыми сообщениями, чтобы получить SSID. Что это за сообщения?
+- **ResponseProbe Request** - здесь скорее всего используется пассивый режим
+- Probe - для активного режима
+- Beacon - поддержание состояния
+- Discovery - обнаружение 
+
+38. An authentication router has been configured with two domains named“Area1” and “Area2”, following which a user is created with the username “huawei”and the password “hello” for authentication. Which domain does this user belongs to?"         	"Маршрутизатор аутентификации был настроен с двумя названными доменами«Area1» и «Area2», после чего пользователь создается с именем пользователя «Huawei»и пароль «привет» для аутентификации. К какому домену принадлежит этот пользователь?
+- **Default domain** - если не указан домен при регистрации, то выдается домен по умолчанию
+
+39. "Which of the following parameters is/are used to identify a security association(SA)?"	   "Какой из следующих параметров используется  для идентификации ассоциации безопасности(SA)?"
+- **Security parameter index (SPI)**
+- **Security protocol (AH or ESP)**
+- **Destination IP address**
+- Source IP address - я могу просто из одной сети в другую перейти, но это все же буду я
+
+40. Какое из следующих утверждений о порте на коммутаторе  является ложным?                interface GigabitEthernet0/0/1                 port link-type trunk                 port trunk pvid vlan 200                 port trunk allow-pass vlan 100
+- **If the VLAN tag carried in a data frame is 100, the switch removes the VLAN tag and sends the frame** - он оставит его
+
+41. By default, all SNMP versions (SNMPv1, SNMPv2c and SNMPv3) are enabled on Huawei AGR3 series routers	По умолчанию все версии SNMP (SNMPV1, SNMPV2C и SNMPV3) включены на маршрутизаторах серии Huawei Agr3
+- **True**
+- False
+
+42. Какие из этих этапов есть в DHSP?
+- **Discover**
+- **Release**
+- Reduce
+- Inform
+
+43. Примените следующий ACL к SNMP. Какое из следующих утверждений является ложным?                acl number 2000                rule 5 permit source 192.168.1.2 0                rule 10 permit source 192.168.1.3 0                rule 15 permit source 192.168.1.4 0 
+- **The device whose IP address is 192.168.1.5 can use the SNMP service** - применяется первое правло
+
+44. Which of the following IPv6 extension headers can occur twice?"	"Какие из следующих заголовков расширения IPv6 могут возникнуть дважды?
+- **Destination Options header** - он может использоваться как для конечной точки, так и для промежуточных, поэтому логично, что их может быть несколько
+
+45. In order to join the wireless network STA needs to obtain wireless network information first. Which of the following messages is used by the STA to actively obtain the SSID information?                Чтобы подключиться к беспроводной сети, персоналу необходимо сначала получить информацию о беспроводной сети. Какое из следующих сообщений используется персоналом для активного получения информации SSID?
+- **Probe** - в активном режиме
+
+46. The IPv6 address 2001:ABEF:224E:FFE2:BCC0:CD00:DDB:8D58 cannot be abbreviated	Адрес IPv6 2001: ABEF: 224E: FFE2: BCC0: CD00: DDB: 8D58 не может быть сокращено
+- **True** - нулевых хестетов нигде нет
+
+47. For multiple paths to the same destination network, the router needs to compare cost values of the paths. If the cost values are the same, the router selects the paths based on the preference value.	Для нескольких путей в одну и ту же сеть назначения маршрутизатор должен сравнивать значения затрат путей. Если значения стоимости одинаковы, маршрутизатор выбирает пути на основе значения предпочтения.
+- **True**
+- False
+
+48. In the case of Huawei router, what is the "-i" parameter in a Ping command issued on a VRP operating system used to set?	                 В случае с маршрутизатором Huawei, для чего используется параметр "-i" в команде Ping, выданной в операционной системе VRP?
+- **Interface for sending an Echo Request packet** - '-i' - означает интерфейс с которого отправлять
+
+49. A hybrid port can be connected to either a user host or a switch	Гибридный порт может быть подключен либо к хосту пользователя, либо к переключателю
+- **True** - на то он и гибридный, что = Trunk + Access
+
+50. Дан acl,  какие адреса пройдут             Acl 2000              Rule 5 permit 172.16.0.32 0              Rule 10 permit 172.16.0.0 0.255.0.0
+- **172.16.0.32/32** - полное совпадение
+- **172.17.0.0/24** - совпадение со 2
+- **172.18.0.0.24** - совпадение со 2
+- 172.16.0.3/24 - ни с кем не совпадает
+
+51. If the transport-layer protocol is UDP, the value of the “Protocol” field at the network layer is 6."	"Если протокол транспортного слоя является UDP, значение поля «протокола» на сетевом уровне составляет 6
+- **False** - для UDP - 17 (0x11)
+- True
+
+52. Which of the following commands can switch a view from the system view to the user view?         	Какая из следующих команд может переключить представление с представления системы на представление пользователя?
+- **Quit**
+
+53. Which stage of the life cycle of campus network construction is the beginning of a project?                Какой этап жизненного цикла строительства сети кампуса является началом проекта?
+- **Planning and design**
+
+54. <Huawei> system-view         [Huawei] user-interface console 0         [Huawei-ui-console0] user privilege level 15         [Huawei-ui-console0] authentication-mode password         [Huawei-ui-console0] set authentication password cipher huawei2012         [Huawei-ui-console0] quit         См. Вывод конфигурации. Администратор настроил устройство, используя команды в выходе конфигурации. Что касается этих команд, какое утверждение является ложным
+- **The password of a user logged in through console is ‘cipher huawei2012’** - сам пароль 'huawei2012', cipher- метод хранения
+
+55. Which of the following description of static and dynamic routing is wrong?                            Какое из следующих описаний статической и динамической маршрутизации неверно?
+- **After the link fails, the static route can automatically complete the network convergence** - статический маршрут не подстраивается под изменения сети
+
+56. When a router is powered on, the router reads the configuration file saved in the default save directory to get itself initialized. If the configuration file does not exist in the default save directory, what does the router use to initialize itself?	                   Когда маршрутизатор включен, маршрутизатор считывает файл конфигурации, сохраненный в каталоге сохранения по умолчанию, чтобы получить инициализированное. Если файл конфигурации не существует в каталоге сохранения по умолчанию, что использует маршрутизатор для инициализации?
+- **Default parameters**
+
+57. The administrator plans to implement route backup by configuring static floating routes, what is the correct way to achieve this?                  Администратор планирует реализовать резервирование маршрутов путем настройки статических плавающих маршрутов, что является правильным способом достижения этой цели?
+- **The administrator needs to configure different protocol priority values for the main static route and the standby static route**
+
+58. What is the default priority of OSPF routes on a Huawei AR router?"	        "Каков приоритет по умолчанию маршрутов OSPF на маршрутизаторе Huawei AR?
+- **10**
+
+59. Now there are the following four segments: 10.24.0.0/24, 10.24.1.0/24, 10.24.2.0/24, 10.24.3.0/24, which route can point to these four network segments at the same time?                       Теперь есть следующие четыре сегмента: 10.24.0.0/24, 10.24.1.0/24, 10.24.2.0/24, 10.24.3.0/24, какой маршрут может указывать на эти четыре сегмента сети одновременно?
+- **10.24.0.0/22** - минимальная маска
+- **10.24.0.0/21** - маска на 1 бит меньше, захватывает больший диапазон
+- **0.0.0.0/0** - маршрут по умолчанию (захватывает все)
+
+60. In the history of WLAN development, which of the following are included in the main wireless protocol standards in the primary mobile office era?    	В истории разработки WLAN, что из перечисленного включено в основные стандарты беспроводного протокола в эпоху основного офиса?
+- **802.11a**
+- **802.11b**
+- 802.11ac - это Wi-Fi 5
+- **802.11g**
+
+61. Which of the following command line views exist on the Versatile Routing Platform (VRP)	Какие из следующих представлений командной строки существуют на универсальной платформе маршрутизации (VRP)
+- **System view**
+- **Interface view**
+- **Protocol view**
+- **User view**
+
+62. Which of the following methods are supported by VRP to configure the router?                Какие из следующих методов поддерживаются VRP для настройки маршрутизатора?
+- **Through the Console port**
+- **Through Telnet.**
+- **Through the mini-USB port.**
+- Through FTP - через него только файл кидать
+
+63. При выборе root комутатора что будет учитываться первым?
+- **Bridge ID**
+
+64. What is the length (in bits) of the "Traffic Class" field in the IPv6 packet header?	 Какова длина (в битах) поля «класса трафика» в заголовке пакета IPv6?
+- **8** - в IPv6 только Version - 4 бита, остальное не меньше 8
+
+65. According to the VLAN frame format defined in IEEE 802.1Q, how many bits does a VLAN ID contain? 	          Согласно формату кадра VLAN, определенным в IEEE 802.1Q, сколько бит содержит ID VLAN?
+- **12** - диапазон VLAN - 0-4096, это занимает 12 бит
+
+66. The Network Management Station uses SNMP to manage devices, which SNMP message is sent when an SNMP registered abnormal event occurs?           	Станция управления сетью использует SNMP для управления устройствами, какое сообщение SNMP отправляется, когда происходит зарегистрированное аномальное событие SNMP?
+- **Trap** - остальное это CRUD с состоянием
+
+67. If the Length/Type of an Ethernet data frame = 0x8100, which of the following statements is correct?                Если длина/тип кадра данных Ethernet = 0x8100, какое из следующих утверждений верно?
+- **This data frame must carry VLAN TAG** - 0x8100 это 802.1Q (VLAN)
+
+68. \[Router\] ip pool pool1                  [Router-ip-pool-pool1] network 10.10.10.0 mask 255.255.255.0                  [Router-ip-pool-pool1] gateway-list 10.10.10.1                  [Router-ip-pool-pool1] quit                  [Router] ip pool pool2.                  [Router-ip-pool-pool2] network 10.20.20.0 mask 255.255.255.0                  [Router-ip-pool-pool2] gateway-list 10.20.20.1                  [Router-ip-pool-pool2] quit                  [Router] interface GigabitEthernet 1/0/0                  [Router-GigabitEthernet1/0/0] ip address 10.10.10.1 24                  [Router-GigabitEthernet1/0/0] dhcp select global                                    После того, как администратор выполняет предыдущие конфигурации на маршрутизаторе, какой из следующих IP -адресов может подключить хост с G1/0/0 на маршрутизаторе?
+- **IP address on the 10.10.10.0/24 network segment** - скорее всего IP адрес выдается из пула с наименьшим значением (10.20.20.0/24 по числам больше), но это предположение
+
+69. A port directly connects to a designated port on the peer device and is used to receive BPDU to monitor the changes occurring in the network. However, it does not forward any packet. Which of the following ports represents this port?	              Порт непосредственно подключается к указанному порту на одноранговом устройстве и используется для приема BPDU для мониторинга изменений, происходящих в сети. Тем не менее, он не пересылает пакет. Какой из следующих портов представляет этот порт?
+- **Alternate Port**
+
+70. When using ftp for file transfer how many connections will be established   Сколько соединений будет установлено при использовании ftp для передачи файлов
+- **2** - для управления и передачи - разные порты
+
+71. When using the ping command on the VRP platform, if you need to specify an IP address as the source address of the echo request message, which of the following parameters should be used?      При использовании команды ping на платформе VRP, если вам нужно указать IP-адрес в качестве адреса источника сообщения эхо-запроса, какой из следующих параметров следует использовать?  
+- **-a** - '-a' - адрес назначения
+
+72. Which of the following IEEE802.11 standards only supports 2.4GHz frequency for communication ?Какой из следующих стандартов IEEE802.11 поддерживает только частоту 2,4 ГГц для связи?
+- **802.11g** - остальные поддерживают 5GHz
+
+73. Which of the following fields exist in both IPv6 and IPv4 packet headers?	Какие из следующих полей существуют в заголовках пакетов IPv6 и IPv4?
+- **Destination Address**
+- **Version**
+- Next header - IPv6 only
+- **Source Address**
+
+74. display startup              MainBoard:               Startup system software: sd1:/ar2220-v200r003c00spc200.cc               Next startup system software: sd1:/ar2220-v200r003c00spc2001cc               Backup system software for next startup: null               Startup saved-configuration file: null               Next startup saved-configuration file: null               Startup license file: null               Next startup license file: null               Startup patch package: null               Next startup patch package: null               Startup voice-files: null               Next startup voice-files: null               The preceding information is the \""display startup\"" command output on the AR2200 router.  Какое из следующих утверждений неверно относится к такой информации?
+- **The system file for next startup cannot be modified.** - может быть изменено
+
+75. Which of the following statements regarding static and dynamic routing is incorrect?      	Какое из следующих утверждений относительно статической и динамической маршрутизации неверно?
+- **The static route can automatically recover when a link failure is encountered**
+
+76. The network administrator of a certain company wants to uniformly divide the users who often access the company network from different switches into VLAN 10 when they frequently change office locations. Which of the following methods should be used to divide VLANs?          Сетевой администратор определенной компании хочет равномерно разделить пользователей, которые часто получают доступ к сети компании с разных коммутаторов, на VLAN 10, когда они часто меняют местоположение офиса. Какой из следующих методов следует использовать для разделения VLAN? 
+- **Divide VLAN based on MAC address** - нужно, чтобы один и тот же компьютер использовал один и тот же VLAN
+
+77. Following a failure of services in the network, an administrator discovered that the configuration in one of the enterprise routers had been changed.What actions can be taken by the administrator to prevent further changes?       	После сбоя услуг в сети администратор обнаружил, что конфигурация в одном из корпоративных маршрутизаторов была изменена. Администратор может предпринять действия, чтобы предотвратить дальнейшие изменения?
+- The administrator should configure port-security on the router
+- **The administrator should limit access by setting the login privilege of users to 0**
+- **The administrator should configure AAA to manage user authorization on the router**
+- **The administrator should configure an ACL to allow only the administrator to manage the router**
+
+78. What functions does a Hello packet of OSPF implement? 	Какие функции реализует Hello Packet of OSPF?
+- **Neighbor discovery**
+- Negotiation of parameters among adjacent ports - это DBD пакеты
+- Deletion of unreachable neighbors - это делает сам роутер без уведомления других
+- **Maintaining of neighbor relationships**
+
+79. When redundant links exist on a switching network, STP can be used to eliminate loops	если есть петли, STP может с ними справится
+- **True**
+- False
+
+80. The Layer 2 switch is a data link layer device, which can identify the MAC address information in the data frame, forward data according to the MAC address, and record these MAC addresses and corresponding port information in its own MAC address table.                    Коммутатор уровня 2 - это устройство канального уровня, которое может идентифицировать информацию о MAC-адресе в кадре данных, пересылать данные в соответствии с MAC-адресом и записывать эти MAC-адреса и соответствующую информацию о порте в свою собственную таблицу MAC-адресов.
+- **True** 
+
+81. On a serial interface, you can configure a static route by specifying the next hop address or outbound interface.	На последовательном интерфейсе вы можете настроить статический маршрут, указав следующий адрес хопа или исходящий интерфейс.
+- **True**
+
+82. In what state does the OSPF protocol determine the master-slave relationship of DD packets?       В каком состоянии протокол OSPF определяет отношение ведущий-ведомый пакетов DD?
+- **2-way** - работа начинается в этом состоянии, другие достигаются ВО ВРЕМЯ разбора отношений
+
+83. Информация о радиусе маршрутизатора настроена следующим образом. Какие из Следующие утверждения являются правильными? radius-server template huawei             radius-server shared-key cipher huawei             radius-server authentication 200.0.12.1 1812             radius-server accounting 200.0.12.1 1813             radius-attribute nas-ip 200.0.12.2
+- **The IP address of the authentication server is 200.0.12.1.**
+- **The IP address of the accounting server is 200.0.12.1.**
+- **The source IP address of the RADIUS packets sent by the router is 200.0.12.2.**
+- The IP address of the authorization server is 200.0.12.1 - у RADIUS нет отдельного AUTHORIZATION сервера, там аутентификация и авторизация вместе
+
+84. After a network administrator enables the traceroute function on a router, what is the value of the "Protocol" field in the IPv4 header of the data packet sent by the router?	           После того, как сетевой администратор включает функцию Traceroute на маршрутизаторе, каково значение поля «протокола» в заголовке IPv4 пакета данных, отправленного маршрутизатором?
+- **1**
+
+85. In RSTP, an edge port becomes a common STP port after receiving a configuration BPDU 	в RSTP крайний порт становится обычным STP портом
+- **Ture** - Edge порт сразу переходит в Forwarding
+
+86. ICMP packets do not contain port numbers. Thereforem NAPT cannot be used.  |  Пакеты ICMP не содержат номера портов. Таким образом, NAPT не может быть использован.
+- **False** - порты используют приложения, которые имеют порты
+
+87. Which of the following commands is used to display the OSPF neighbor relationship establishment?  	Какая из следующих команд используется для отображения установления отношений между соседями OSPF?
+- **display ospf peer**
+
+88. MPLS is often used on IP backbone networks. Forwarding equivalence class (FEC) is a term used in MPLS to describe a collection of packets with the same characteristics.	MPLS часто используется в сетях IP -магистрали. Класс эквивалентности пересылки (FEC) - это термин, используемый в MPLS для описания коллекции пакетов с одинаковыми характеристиками.
+- **True**
+
+89. Which field in the IPv6 packet header can be used for QoS?	      Какое поле в заголовке пакета IPv6 можно использовать для QOS?
+- **Traffic class**
+
+90. After a switch receives a unicast data frame, it searches the MAC address table for the destination MAC address. Which of the following statements is false?                    	После того, как коммутатор получает unicast data frame, он ищет таблицу MAC -адресов для MAC -адреса назначения. Какое из следующих утверждений является ложным?
+- **If the MAC address cannot be found, the switch discard the frame** - должно быть это
+
+91. Which of the following statement about Python is incorrect?                    Какое из следующих утверждений о Python неверно?
+- **Is a fully open source high-level programming language**
+
+92. Какие типы ACL существуют
+- **Basic**
+- **User**
+- **Advanced**
+- **Layer 2**
+
+93. On Huawei switches, you can rut the vlan batch command to create multiple VLANs in batches  |  На коммутаторах Huawei вы можете направить команду VLAN Pactor, чтобы создать несколько VLAN в партиях
+- **True**
+
+94. Информация о конфигурации G0/0/1 на коммутаторе выглядит следующим образом. Какие из следующих кадров данных VLAN являются нетегированными, когда коммутатор пересылает эти кадры?             #             interface GigabitEthernet0/0/1              port link-type trunk              port trunk pvid vlan 10              port trunk allow-pass vlan 10 20 30 40              #
+- **Data frames from VLAN 10**
+
+95. The controller is the core component of SDN. The controller connects to the device through the southbound interface. Which of the following belong to the controller southbound protocol?                 Контроллер является основным компонентом SDN. Контроллер подключается к устройству через интерфейс southbound. Что из перечисленного ниже относится к протоколу южного соединения контроллера?
+- **OpenFlow**
+- **SNMP**
+
+96. If a loop occurs on a switching network, a broadcast storm may occur."	"Если в переключающей сети происходит цикл, может произойти шторм вещания
+- **True**
+
+97. After a network administrator enables the traceroute function on a router, what is the value of the "TTL" field in the IPv4 header of the first data packet sent by the router?	После того, как сетевой администратор включает функцию Traceroute на маршрутизаторе, каково значение поля «TTL» в заголовке IPv4 первого пакета данных, отправленного маршрутизатором?
+- **1** - другой получает, декрементирует, получает 0 и возвращает ICMP
+
+98. \[RTA\]acl 2001 \[RTA-acl-basic-2001\] rule permit source 10.0.1.0 0.0.0.255                [RTA-acl-basic-2001] rule deny source 10.0.1.0 0.0.0.255. Какое из следующих утверждений, касающихся ACL 2001 правильный?
+- **00:26:57:00:1F:02**
+- **02:26:57:00:1F:02**
+- 03:26:57:00:1F:02
+- 01:26:57:00:1F:02
+
+Пояснение: в MAC адресе 1 бит первого октета - бит мультикаста. Если 1 - адрес групповой, иначе для одного устройства
+
+99. What is the default priority of static routes on a Huawei AR router?	Каков приоритет по умолчанию статических маршрутов на маршрутизаторе Huawei AR?
+- **60**
+
+100. In IPv6, the flow label field, source address field, and destination address field specify a forwarding path for a specific data flow.	В IPv6 поле метки потока, поле адреса источника и поле адреса назначения указывают путь пересылки для конкретного потока данных.
+- **True**
